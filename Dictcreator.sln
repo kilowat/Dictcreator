@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.202
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictcreator", "Dictcreator\Dictcreator.csproj", "{276F767C-9120-4377-B8C2-E7A1A665592E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{276F767C-9120-4377-B8C2-E7A1A665592E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{276F767C-9120-4377-B8C2-E7A1A665592E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{276F767C-9120-4377-B8C2-E7A1A665592E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{276F767C-9120-4377-B8C2-E7A1A665592E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CD7483F1-6130-42A4-9821-E79FAB894C50}
+	EndGlobalSection
+EndGlobal
