@@ -44,8 +44,9 @@
             Content="Выбрать таблицу" 
             Grid.Row="1" 
             Grid.Column="1"
-            Margin="0, 0, 10, 0" Background="#FFFDE449"/>
-        <TextBlock 
+            Margin="0, 0, 10, 0" Background="#FFFDE449" Click="ClickSelectTableButton"/>
+        <TextBlock
+            x:Name="selectFielTextBox"
             Text="Файл не выбран" 
             Grid.Row="1" 
             Grid.Column="2"/>
@@ -55,7 +56,9 @@
             Grid.Column="1" 
             Grid.Row="2" 
             Margin="0,8,0,0"/>
-        <TextBox Text="A" 
+        <TextBox 
+            x:Name="colNumberIndex"   
+            Text="A"  
             Grid.Column="2"
             Margin="0,10,166,6"
             TextAlignment="Center"     
@@ -66,7 +69,9 @@
             Grid.Column="1" 
             Grid.Row="3" 
             Margin="0,8,0,0"/>
-        <TextBox Text="B" 
+        <TextBox 
+            Text="B"
+            x:Name="colEnWord"
             Grid.Column="2"
             Margin="0,10,166,6"
             TextAlignment="Center"     
@@ -85,7 +90,9 @@
             Grid.Column="1" 
             Grid.Row="4" 
             Margin="0,8,0,0"/>
-        <TextBox Text="C" 
+        <TextBox 
+            x:Name="colTranscript"
+            Text="C"
             Grid.Column="2"
             Margin="0,10,166,6"
             TextAlignment="Center"     
@@ -96,7 +103,9 @@
             Grid.Column="1" 
             Grid.Row="5" 
             Margin="0,8,0,0"/>
-        <TextBox Text="D" 
+        <TextBox 
+            Text="D" 
+            x:Name="colTranslation"
             Grid.Column="2"
             Margin="0,10,166,6"
             TextAlignment="Center"     
@@ -107,17 +116,21 @@
             Grid.Column="1" 
             Grid.Row="6" 
             Margin="0,8,0,0"/>
-        <TextBox Text="E" 
+        <TextBox
+            x:Name="colExamples"
+            Text="E" 
             Grid.Column="2"
             Margin="0,10,166,6"
             TextAlignment="Center"     
             Grid.Row="6"/>
-        <TextBlock 
+        <TextBlock
             Text="Макс:" 
             Grid.Column="2" 
             Grid.Row="6" 
             Margin="56,10,109,0"/>
-        <TextBox Text="2" 
+        <TextBox 
+            x:Name="maxExample"
+            Text="2" 
             Grid.Column="2"
             Margin="108,10,58,6"
             TextAlignment="Center"     
@@ -128,7 +141,9 @@
             Grid.Column="1" 
             Grid.Row="7" 
             Margin="0,8,0,0"/>
-        <TextBox Text="F" 
+        <TextBox
+            x:Name="colAudio"
+            Text="F" 
             Grid.Column="2"
             Margin="0,10,166,6"
             TextAlignment="Center"     
@@ -139,7 +154,8 @@
             Grid.Column="1" 
             Grid.Row="8" 
             Margin="0,8,0,0"/>
-        <TextBox 
+        <TextBox
+            x:Name="colYouglish"
             Text="G" 
             Grid.Column="2"
             Margin="0,10,166,6"
@@ -151,7 +167,8 @@
             Grid.Column="1" 
             Grid.Row="9" 
             Margin="0,8,0,0"/>
-        <TextBox 
+        <TextBox
+            x:Name="colContextReverso"
             Text="H" 
             Grid.Column="2"
             Margin="0,10,166,6"
@@ -164,6 +181,7 @@
             Grid.Row="10" 
             Margin="0,8,0,0"/>
         <TextBox 
+            x:Name="colWoordHunt"
             Text="J" 
             Grid.Column="2"
             Margin="0,10,166,6"
@@ -176,6 +194,7 @@
             Grid.Row="11" 
             Margin="0,8,0,0"/>
         <TextBox 
+            x:Name="colMerWebster"
             Text="K" 
             Grid.Column="2"
             Margin="0,10,166,6"
@@ -186,21 +205,29 @@
              Text="Начать с номера строки:" 
              Grid.Column="1" 
              Grid.Row="12" 
-             Foreground="Blue"
+             Foreground="Red"
              Margin="0,8,0,0"/>
-        <TextBox 
+        <TextBox
+            x:Name="startNumberIndex"
             Text="1" 
             Grid.Column="2"
             Margin="0,10,166,6"
             TextAlignment="Center"     
             Grid.Row="12"/>
-       
-        <Border 
-            Grid.Column="1" 
-            Background="Gray" 
-            Grid.Row="13" 
-            Grid.ColumnSpan="2"
-            Margin="0,18,0,21"/>
+
+        <TextBlock 
+             Text="Закончить номером:" 
+             Grid.Column="1" 
+             Grid.Row="13" 
+             Foreground="Red"
+             Margin="0,8,0,0"/>
+        <TextBox
+            x:Name="endNumberIndex"
+            Text="100" 
+            Grid.Column="2"
+            Margin="0,10,166,6"
+            TextAlignment="Center"     
+            Grid.Row="13"/>
 
         <TextBlock 
              Text="Обрабатываемый индекс:" 
@@ -228,22 +255,25 @@
             TextAlignment="Center"     
             Grid.Row="15" Foreground="#FFDA8408"/>
 
-        <ProgressBar 
+        <ProgressBar
+            x:Name="progress"
             Grid.Column="1" 
             Grid.Row="16"
             Grid.ColumnSpan="2" Value="-3"/>
-        <Button 
+        <Button
+            x:Name="startButton"
             Grid.Column="1" 
             Grid.Row="18"
             Margin="5"
             Background="Green"
             Foreground="White"
-            Content="Запустить"/>
-        <Button 
+            Content="Запустить" Click="ClickStartButton"/>
+        <Button
+            x:Name="cancelButton"
             Grid.Column="2" 
             Grid.Row="18"
             Margin="5"
             Background="Cornsilk"
-            Content="Отменить"/>
+            Content="Отменить" Click="ClickCancelButton"/>
     </Grid>
 </Window>
