@@ -11,6 +11,7 @@ namespace Dictcreator
         #region Properties
         private static AppSettings _instance;
 
+        private Dictionary<int, ColumnName> _columnNameIndexMap = new Dictionary<int, ColumnName>();
         private Dictionary<string, int> _colCharIndexMap = new Dictionary<string, int>();
 
         private string _fileXlsPath = string.Empty;
@@ -26,7 +27,7 @@ namespace Dictcreator
         private string _colWoordHunt = string.Empty;
         private string _colMerWebster = string.Empty;
         private int _startNumberIndex = 1;
-
+        private int _endNumberIndex = 100;
         public static AppSettings Instance
         {
             private set { }
@@ -41,7 +42,15 @@ namespace Dictcreator
         }
 
         public string FileXlsPath { get => _fileXlsPath; set => _fileXlsPath = value; }
-        public string ColNumberIndex { get => _colNumberIndex; set => _colNumberIndex = value; }
+        public string ColNumberIndex
+        {
+            get => _colNumberIndex;
+            set
+            {
+                _colNumberIndex = value;
+                ColumnNameIndexMap[ColCharIndexMap[value]] = ColumnName.NUMBER;
+            }
+        }
         public string ColEnWord { get => _colEnWord; set => _colEnWord = value; }
         public string ColTranscript { get => _colTranscript; set => _colTranscript = value; }
         public string ColTranslation { get => _colTranslation; set => _colTranslation = value; }
@@ -65,6 +74,10 @@ namespace Dictcreator
             }
         }
 
+        public int EndNumberIndex { get => _endNumberIndex; set => _endNumberIndex = value; }
+        public Dictionary<string, int> ColCharIndexMap { get => _colCharIndexMap; private set => _colCharIndexMap = value; }
+        public Dictionary<int, ColumnName> ColumnNameIndexMap { get => _columnNameIndexMap; private set => _columnNameIndexMap = value; }
+
         #endregion
 
         private AppSettings()
@@ -77,9 +90,23 @@ namespace Dictcreator
             int i = 1;
             for (char letter = 'A'; letter <= 'Z'; letter++)
             {
-                _colCharIndexMap[letter.ToString()] = i;
+                ColCharIndexMap[letter.ToString()] = i;
                 i++;
             }
         }
+    }
+
+    public enum ColumnName
+    {
+        NUMBER,
+        WORD,
+        TRANSCRIPTION,
+        TRANSLATE,
+        EXAMPLES,
+        AUDIO,
+        YOUGLISH,
+        REVERSO,
+        WORD_HUNT,
+        MERRIAM_WEBSTER
     }
 }
