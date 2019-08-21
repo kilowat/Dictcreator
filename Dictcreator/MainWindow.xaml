@@ -6,17 +6,15 @@
         xmlns:local="clr-namespace:Dictcreator"
         mc:Ignorable="d"
         Title="Dictcreator"
-        Height="400" 
-        Width="400"
+        Height="800" 
+        Width="480"
         ResizeMode="NoResize"
-        FontSize="18">
+        FontSize="16">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -24,13 +22,228 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <Button Content="Выбрать таблицу" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" Margin="0, 0, 10, 0"/>
-        <TextBlock Text="Файл не выбран" Grid.Row="1" Grid.Column="3"/>
+
+        <Button 
+            Content="Выбрать таблицу" 
+            Grid.Row="1" 
+            Grid.Column="1"
+            Margin="0, 0, 10, 0" Background="#FFFDE449"/>
+        <TextBlock 
+            Text="Файл не выбран" 
+            Grid.Row="1" 
+            Grid.Column="2"/>
+
+        <TextBlock 
+            Text="Колонка номер:" 
+            Grid.Column="1" 
+            Grid.Row="2" 
+            Margin="0,8,0,0"/>
+        <TextBox Text="A" 
+            Grid.Column="2"
+            Margin="0,10,166,6"
+            TextAlignment="Center"     
+            Grid.Row="2"/>
+
+        <TextBlock 
+            Text="Колонка слово:" 
+            Grid.Column="1" 
+            Grid.Row="3" 
+            Margin="0,8,0,0"/>
+        <TextBox Text="B" 
+            Grid.Column="2"
+            Margin="0,10,166,6"
+            TextAlignment="Center"     
+            Grid.Row="3"/>
+
+        <TextBlock Text="В этой колонке должны &#x0a; быть английские слова" 
+            FontSize="13"
+            Grid.Column="2"
+            Margin="64,0,10,0"
+            TextAlignment="Left"
+            Foreground="Red"
+            Grid.Row="3" 
+            FontStyle="Italic" Grid.ColumnSpan="2"/>
+        <TextBlock 
+            Text="Колонка транc-ция:" 
+            Grid.Column="1" 
+            Grid.Row="4" 
+            Margin="0,8,0,0"/>
+        <TextBox Text="C" 
+            Grid.Column="2"
+            Margin="0,10,166,6"
+            TextAlignment="Center"     
+            Grid.Row="4"/>
+
+        <TextBlock 
+            Text="Колонка перевод:" 
+            Grid.Column="1" 
+            Grid.Row="5" 
+            Margin="0,8,0,0"/>
+        <TextBox Text="D" 
+            Grid.Column="2"
+            Margin="0,10,166,6"
+            TextAlignment="Center"     
+            Grid.Row="5"/>
+
+        <TextBlock 
+            Text="Колонка примеры:" 
+            Grid.Column="1" 
+            Grid.Row="6" 
+            Margin="0,8,0,0"/>
+        <TextBox Text="E" 
+            Grid.Column="2"
+            Margin="0,10,166,6"
+            TextAlignment="Center"     
+            Grid.Row="6"/>
+        <TextBlock 
+            Text="Макс:" 
+            Grid.Column="2" 
+            Grid.Row="6" 
+            Margin="56,10,109,0"/>
+        <TextBox Text="2" 
+            Grid.Column="2"
+            Margin="108,10,58,6"
+            TextAlignment="Center"     
+            Grid.Row="6"/>
         
-        <CheckBox Grid.Column="1" Grid.Row="2" Margin="0, 12, 0, 0" IsChecked="True"/>
-        <TextBlock Grid.Column="2" Grid.Row="2" Margin="0, 6, 0, 0" Text="Скачивать audio файл"/>
+        <TextBlock 
+            Text="Колонка аудио:" 
+            Grid.Column="1" 
+            Grid.Row="7" 
+            Margin="0,8,0,0"/>
+        <TextBox Text="F" 
+            Grid.Column="2"
+            Margin="0,10,166,6"
+            TextAlignment="Center"     
+            Grid.Row="7"/>
+
+        <TextBlock 
+            Text="Колонка youglish:" 
+            Grid.Column="1" 
+            Grid.Row="8" 
+            Margin="0,8,0,0"/>
+        <TextBox 
+            Text="G" 
+            Grid.Column="2"
+            Margin="0,10,166,6"
+            TextAlignment="Center"     
+            Grid.Row="8"/>
+
+        <TextBlock 
+            Text="Колонка context.reverso:" 
+            Grid.Column="1" 
+            Grid.Row="9" 
+            Margin="0,8,0,0"/>
+        <TextBox 
+            Text="H" 
+            Grid.Column="2"
+            Margin="0,10,166,6"
+            TextAlignment="Center"     
+            Grid.Row="9"/>
+
+        <TextBlock 
+            Text="Колонка wooordhunt:" 
+            Grid.Column="1" 
+            Grid.Row="10" 
+            Margin="0,8,0,0"/>
+        <TextBox 
+            Text="J" 
+            Grid.Column="2"
+            Margin="0,10,166,6"
+            TextAlignment="Center"     
+            Grid.Row="10"/>
+
+        <TextBlock 
+            Text="Колонка merriam-webster:" 
+            Grid.Column="1" 
+            Grid.Row="11" 
+            Margin="0,8,0,0"/>
+        <TextBox 
+            Text="K" 
+            Grid.Column="2"
+            Margin="0,10,166,6"
+            TextAlignment="Center"     
+            Grid.Row="11"/>
+
+        <TextBlock 
+             Text="Начать с номера строки:" 
+             Grid.Column="1" 
+             Grid.Row="12" 
+             Foreground="Blue"
+             Margin="0,8,0,0"/>
+        <TextBox 
+            Text="1" 
+            Grid.Column="2"
+            Margin="0,10,166,6"
+            TextAlignment="Center"     
+            Grid.Row="12"/>
+       
+        <Border 
+            Grid.Column="1" 
+            Background="Gray" 
+            Grid.Row="13" 
+            Grid.ColumnSpan="2"
+            Margin="0,18,0,21"/>
+
+        <TextBlock 
+             Text="Обрабатываемый индекс:" 
+             Grid.Column="1" 
+             Grid.Row="14" 
+             Foreground="#FFD100FF"
+             Margin="0,8,0,0"/>
+        <TextBlock 
+            Text="0" 
+            Grid.Column="2"
+            Margin="0,10,166,6"
+            TextAlignment="Center"     
+            Grid.Row="14" Foreground="#FFE80000"/>
+        
+        <TextBlock 
+             Text="Обрабатываемое слово:" 
+             Grid.Column="1" 
+             Grid.Row="15" 
+             Foreground="#FFD100FF"
+             Margin="0,8,0,0"/>
+        <TextBlock 
+            Text="Процесс не запущен" 
+            Grid.Column="2"
+            Margin="0,10,10,6"
+            TextAlignment="Center"     
+            Grid.Row="15" Foreground="#FFDA8408"/>
+
+        <ProgressBar 
+            Grid.Column="1" 
+            Grid.Row="16"
+            Grid.ColumnSpan="2" Value="-3"/>
+        <Button 
+            Grid.Column="1" 
+            Grid.Row="18"
+            Margin="5"
+            Background="Green"
+            Foreground="White"
+            Content="Запустить"/>
+        <Button 
+            Grid.Column="2" 
+            Grid.Row="18"
+            Margin="5"
+            Background="Cornsilk"
+            Content="Отменить"/>
     </Grid>
 </Window>
