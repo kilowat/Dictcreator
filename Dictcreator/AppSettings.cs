@@ -135,7 +135,7 @@ namespace Dictcreator
 
         private void InitColCharIndexMap()
         {
-            int i = 0;
+            int i = 1;
             for (char letter = 'A'; letter <= 'Z'; letter++)
             {
                 ColCharIndexMap[letter.ToString()] = i;

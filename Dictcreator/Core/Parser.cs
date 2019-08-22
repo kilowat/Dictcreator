@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Dictcreator.Core
 {
@@ -97,17 +98,24 @@ namespace Dictcreator.Core
 
             CancelToken.ThrowIfCancellationRequested();
 
-            string[] testArr = new string[]{"run", "home", "dog", "task", "work"};
+            Excel.Application xlApp = new Excel.Application();
+            Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(AppSettings.Instance.FileXlsPath);
+            Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
+            Excel.Range xlRange = xlWorksheet.UsedRange;
 
-            for (int i = 0; i < testArr.Length; i++)
+            for (int i = AppSettings.Instance.StartNumberIndex; i <= AppSettings.Instance.EndNumberIndex; i++)
             {
+                var colWordIndex = AppSettings.Instance.ColumnNameIndexMap[ColumnName.WORD];
+
+                var currentWord = xlRange.Cells[i, colWordIndex].Value2.ToString();
+
                 if (OnProcessIndexStep != null)
                 {
-                    OnProcessIndexStep(i+1);
+                    OnProcessIndexStep(i);
                 }
                 if (OnProcessWordStep != null)
                 {
-                    OnProcessWordStep(testArr[i]);
+                    OnProcessWordStep(currentWord);
                 }
 
                 //Thread.Sleep(1000);
@@ -121,7 +129,7 @@ namespace Dictcreator.Core
 
                 foreach (DataFetcher fetcher in _dataFetcher)
                 {
-                    string result = fetcher.GetResult(testArr[i]);
+                    string result = fetcher.GetResult(currentWord);
 
                     if (fetcher.CellExlType == CellType.STRING)
                     {
