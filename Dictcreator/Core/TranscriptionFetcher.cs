@@ -12,22 +12,27 @@ namespace Dictcreator.Core
     public class TranscriptionFetcher : DataFetcher
     {
         private string _siteUrl = "https://tophonetics.com/";
-        private object client;
 
         protected override ColumnName ColName => ColumnName.TRANSCRIPTION;
 
         public override string GetResult(string word)
         {
+            var result =  GetResultAsync(word);
+            return result.Result;
+        }
+
+        private async Task<string> GetResultAsync(string word)
+        {
             var request = HttpWebRequest.Create(_siteUrl);
 
-            var postData = "text_to_transcribe="+ word + "&submit=Show transcription&output_dialec=am&output_style=only_tr&output_dialect=am";
+            var postData = "text_to_transcribe=" + word + "&submit=Show transcription&output_dialec=am&output_style=only_tr&output_dialect=am";
             var data = Encoding.ASCII.GetBytes(postData);
 
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             request.ContentLength = data.Length;
 
-            using (var stream = request.GetRequestStream())
+            using (var stream = await request.GetRequestStreamAsync())
             {
                 stream.Write(data, 0, data.Length);
             }

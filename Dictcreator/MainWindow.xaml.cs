@@ -114,7 +114,6 @@ namespace Dictcreator
                 cancelButton.IsEnabled = false;
                 processStatusTextBlock.Text = "Процесс завершен";
                 processStatusTextBlock.Foreground = new SolidColorBrush(Colors.Orange);
-                indexCurrentProcessTextBox.Text = "0";
                 progress.Value = 100;
             });
         }
