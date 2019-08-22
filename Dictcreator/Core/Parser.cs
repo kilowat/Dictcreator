@@ -82,9 +82,9 @@ namespace Dictcreator.Core
 
             CancelToken.ThrowIfCancellationRequested();
 
-            string[] testArr = new string[]{"run", "home", "dog", "task"};
+            string[] testArr = new string[]{"run", "home", "dog", "task", "task"};
 
-            for (int i = 0; i < testArr.Length; i++)
+            for (int i = 1; i < testArr.Length; i++)
             {
                 if (OnProcessIndexStep != null)
                 {

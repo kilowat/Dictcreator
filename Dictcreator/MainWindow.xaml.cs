@@ -34,6 +34,8 @@ namespace Dictcreator
 
         private void ClickStartButton(object sender, RoutedEventArgs e)
         {
+           InitSettings();
+
            var result = _parser.RunAsync();
         }
 
@@ -57,6 +59,16 @@ namespace Dictcreator
             _openFielDialog = new OpenFileDialog();
             _openFielDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
 
+            _parser = new Parser();
+            _parser.OnProcessStared += OnProcessStartedHandler;
+            _parser.OnProcessCompleted += OnProcessCompletedHandler;
+            _parser.OnProcessIndexStep += OnProcessIndexStepHandler;
+            _parser.OnProcessWordStep += OnProcessWordStepHandler;
+            _parser.OnProcessCanceled += OnProcessCanceledHandler;
+        }
+
+        private void InitSettings()
+        {
             AppSettings.Instance.ColNumberIndex = colNumberIndex.Text;
             AppSettings.Instance.ColEnWord = colEnWord.Text;
             AppSettings.Instance.ColTranscript = colTranscript.Text;
@@ -70,19 +82,12 @@ namespace Dictcreator
             AppSettings.Instance.ColMerWebster = colMerWebster.Text;
             AppSettings.Instance.StartNumberIndex = Int32.Parse(startNumberIndex.Text);
             AppSettings.Instance.EndNumberIndex = Int32.Parse(endNumberIndex.Text);
-
-            _parser = new Parser();
-            _parser.OnProcessStared += OnProcessStartedHandler;
-            _parser.OnProcessCompleted += OnProcessCompletedHandler;
-            _parser.OnProcessIndexStep += OnProcessIndexStepHandler;
-            _parser.OnProcessWordStep += OnProcessWordStepHandler;
-            _parser.OnProcessCanceled += OnProcessCanceledHandler;
         }
 
         private void OnProcessCanceledHandler()
         {
             this.Dispatcher.Invoke(() => {
-
+                progress.Value = 0;
             });
         }
 
@@ -97,6 +102,7 @@ namespace Dictcreator
         {
             this.Dispatcher.Invoke(() => {
                 indexCurrentProcessTextBox.Text = index.ToString();
+                progress.Value = (index * 100) / AppSettings.Instance.EndNumberIndex;
             });
         }
 
@@ -109,6 +115,7 @@ namespace Dictcreator
                 processStatusTextBlock.Text = "Процесс завершен";
                 processStatusTextBlock.Foreground = new SolidColorBrush(Colors.Orange);
                 indexCurrentProcessTextBox.Text = "0";
+                progress.Value = 100;
             });
         }
 
@@ -120,6 +127,7 @@ namespace Dictcreator
                 cancelButton.IsEnabled = true;
                 processStatusTextBlock.Text = "Процесс запущен";
                 processStatusTextBlock.Foreground = new SolidColorBrush(Colors.Green);
+                progress.Value = 0;
             });
         }
 
