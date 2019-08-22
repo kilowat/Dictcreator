@@ -3,21 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Dictcreator.Core
 {
     public class Parser
     {
-        public static async Task RunAsync()
+        private static List<DataFetcher> _dataFetcher;
+
+        static Parser()
         {
-            await Task.Run(() => Run());
+            _dataFetcher = new List<DataFetcher>();
+            _dataFetcher.Add(new TranscriptionFetcher());
         }
-        public static void Run()
+
+        public static async Task<bool> RunAsync()
         {
             if (CheckSettings())
             {
-                ReadFile();
+                await Task.Run(() => Run());
+                return true;
             }
+            else
+            {
+                return false;
+            }  
+        }
+        public static void Run()
+        {
+            ReadWriteFile();
         }
 
         private static bool CheckSettings()
@@ -25,17 +39,25 @@ namespace Dictcreator.Core
             return true;
         }
 
-        private static void ReadFile()
+        private static void ReadWriteFile()
         {
-            string[] testArr = new string[]{"run, bus, cat, smoke, home, bottle"};
+            string[] testArr = new string[]{"run", "home", "dog", "task"};
 
             for (int i = 0; i < testArr.Length; i++)
             {
-                for (int j = 1; j < 11; j++)
-                {
+                WriteIndex(i);
 
+                foreach (DataFetcher fetcher in _dataFetcher)
+                {
+                    string result = fetcher.GetResult(testArr[i]);
+                    MessageBox.Show(result);
                 }
             }
+        }
+
+        private static void WriteIndex(int index)
+        {
+
         }
     }
 }

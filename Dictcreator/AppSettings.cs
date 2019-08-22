@@ -11,7 +11,7 @@ namespace Dictcreator
         #region Properties
         private static AppSettings _instance;
 
-        private Dictionary<int, ColumnName> _columnNameIndexMap = new Dictionary<int, ColumnName>();
+        private Dictionary<ColumnName, int> _columnNameIndexMap = new Dictionary<ColumnName, int>();
         private Dictionary<string, int> _colCharIndexMap = new Dictionary<string, int>();
 
         private string _fileXlsPath = string.Empty;
@@ -48,11 +48,27 @@ namespace Dictcreator
             set
             {
                 _colNumberIndex = value;
-                ColumnNameIndexMap[ColCharIndexMap[value]] = ColumnName.NUMBER;
+                ColumnNameIndexMap[ColumnName.NUMBER] = ColCharIndexMap[value];
             }
         }
-        public string ColEnWord { get => _colEnWord; set => _colEnWord = value; }
-        public string ColTranscript { get => _colTranscript; set => _colTranscript = value; }
+        public string ColEnWord
+        {
+            get => _colEnWord;
+            set
+            {
+                _colEnWord = value;
+                ColumnNameIndexMap[ColumnName.WORD] = ColCharIndexMap[value];
+            }
+        }
+        public string ColTranscript
+        {
+            get => _colTranscript;
+            set
+            {
+                _colTranscript = value;
+                ColumnNameIndexMap[ColumnName.TRANSCRIPTION] = ColCharIndexMap[value];
+            }
+        }
         public string ColTranslation { get => _colTranslation; set => _colTranslation = value; }
         public string ColExamples { get => _colExamples; set => _colExamples = value; }
         public int MaxExample { get => _maxExample; set => _maxExample = value; }
@@ -76,7 +92,7 @@ namespace Dictcreator
 
         public int EndNumberIndex { get => _endNumberIndex; set => _endNumberIndex = value; }
         public Dictionary<string, int> ColCharIndexMap { get => _colCharIndexMap; private set => _colCharIndexMap = value; }
-        public Dictionary<int, ColumnName> ColumnNameIndexMap { get => _columnNameIndexMap; private set => _columnNameIndexMap = value; }
+        public Dictionary<ColumnName, int> ColumnNameIndexMap { get => _columnNameIndexMap; private set => _columnNameIndexMap = value; }
 
         #endregion
 
@@ -87,7 +103,7 @@ namespace Dictcreator
 
         private void InitColCharIndexMap()
         {
-            int i = 1;
+            int i = 0;
             for (char letter = 'A'; letter <= 'Z'; letter++)
             {
                 ColCharIndexMap[letter.ToString()] = i;

@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Dictcreator.Core;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,7 +33,7 @@ namespace Dictcreator
 
         private void ClickStartButton(object sender, RoutedEventArgs e)
         {
-
+            var result = Parser.RunAsync();
         }
 
         private void ClickCancelButton(object sender, RoutedEventArgs e)
@@ -73,13 +74,20 @@ namespace Dictcreator
         private void ColumnSettings_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
-            var regex = "[A-Z]";
-            var match = Regex.Match(textBox.Text, regex);
+            var match = Regex.Match(textBox.Text, "[A-Z]");
 
-            if (!match.Success)
+            if (textBox.Text.Length > 0)
             {
-                textBox.Text = "A";
-                MessageBox.Show("Значение должно быть в диапозоне A-Z", "Ошибка ввода");
+                if (!match.Success || textBox.Text.Length > 1)
+                {
+                    textBox.Text = "A";
+                    MessageBox.Show("Значение должно быть в диапозоне A-Z", "Ошибка ввода");
+                }
+            }
+            else if(textBox.Name == "colEnWord")
+            {
+                textBox.Text = "B";
+                MessageBox.Show("Значение колонка слово должно быть указано", "Ошибка ввода");
             }
         }
     }
