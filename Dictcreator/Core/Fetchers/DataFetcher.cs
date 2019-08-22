@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dictcreator.Core
+namespace Dictcreator.Core.Fetchers
 {
     public abstract class DataFetcher
     {

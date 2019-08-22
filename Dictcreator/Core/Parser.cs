@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dictcreator.Core.Fetchers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,8 +26,18 @@ namespace Dictcreator.Core
 
         public Parser()
         {
+            InitParser();
+        }
+
+        private void InitParser()
+        {
             _dataFetcher = new List<DataFetcher>();
-            _dataFetcher.Add(new TranscriptionFetcher());
+
+            _dataFetcher.Add(new TranscriptionFetcherTopPhonetics());
+            _dataFetcher.Add(new TranslateFetcherReverso());
+            _dataFetcher.Add(new ExamplesFetcherReverso());
+            _dataFetcher.Add(new AudioFetcherWordHunt());
+
             TokenSource = new CancellationTokenSource();
             CancelToken = TokenSource.Token;
         }

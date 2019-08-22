@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Dictcreator
 {
@@ -13,6 +15,8 @@ namespace Dictcreator
 
         private Dictionary<ColumnName, int> _columnNameIndexMap = new Dictionary<ColumnName, int>();
         private Dictionary<string, int> _colCharIndexMap = new Dictionary<string, int>();
+
+        private string _audioDirName = "audio";
 
         private string _fileXlsPath = string.Empty;
         private string _colNumberIndex = string.Empty;
@@ -28,6 +32,7 @@ namespace Dictcreator
         private string _colMerWebster = string.Empty;
         private int _startNumberIndex = 1;
         private int _endNumberIndex = 100;
+        private string _pathToAudio = string.Empty;
         public static AppSettings Instance
         {
             private set { }
@@ -93,6 +98,33 @@ namespace Dictcreator
         public int EndNumberIndex { get => _endNumberIndex; set => _endNumberIndex = value; }
         public Dictionary<string, int> ColCharIndexMap { get => _colCharIndexMap; private set => _colCharIndexMap = value; }
         public Dictionary<ColumnName, int> ColumnNameIndexMap { get => _columnNameIndexMap; private set => _columnNameIndexMap = value; }
+        public string PathToAudio
+        {
+            get
+            {
+                if (FileXlsPath.Length > 0)
+                {
+                    var arr = FileXlsPath.Split('\\').ToList();
+                    arr.RemoveAt(arr.Count - 1);
+                    _pathToAudio = string.Join("\\", arr);
+                    _pathToAudio += "\\"+ AudioDirName;
+
+                    try
+                    {
+                        Directory.CreateDirectory(_pathToAudio);
+                    }
+                    catch (UnauthorizedAccessException e)
+                    {
+                        MessageBox.Show("Внимание у приложения нет прав на создание раздела");
+                    }
+                }
+
+                return  _pathToAudio;
+            } 
+            private set => _pathToAudio = value;
+        }
+
+        public string AudioDirName { get => _audioDirName; private set => _audioDirName = value; }
 
         #endregion
 

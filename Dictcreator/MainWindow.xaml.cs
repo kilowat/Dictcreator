@@ -51,6 +51,8 @@ namespace Dictcreator
                 var arrPath = _openFielDialog.FileName.Split('\\');
                 selectFielTextBox.Text = arrPath.Last();
                 AppSettings.Instance.FileXlsPath = _openFielDialog.FileName;
+                startButton.IsEnabled = true;
+                startButton.Foreground = new SolidColorBrush(Colors.White);
             }
         }
 

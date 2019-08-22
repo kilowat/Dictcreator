@@ -7,17 +7,17 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dictcreator.Core
+namespace Dictcreator.Core.Fetchers
 {
-    public class TranscriptionFetcher : DataFetcher
+    public class TranscriptionFetcherTopPhonetics : DataFetcher
     {
         private string _siteUrl = "https://tophonetics.com/";
-
+        private string _xPathQuery = "//span[@class='transcribed_word']//text()";
         protected override ColumnName ColName => ColumnName.TRANSCRIPTION;
 
         public override string GetResult(string word)
         {
-            var result =  GetResultAsync(word);
+            var result = GetResultAsync(word);
             return result.Result;
         }
 
@@ -43,7 +43,8 @@ namespace Dictcreator.Core
 
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(responseString);
-            var transcription = htmlDoc.DocumentNode.SelectSingleNode("//span[@class='transcribed_word']//text()");
+
+            var transcription = htmlDoc.DocumentNode.SelectSingleNode(_xPathQuery);
 
             if (transcription != null)
                 return transcription.OuterHtml;

@@ -67,9 +67,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AppSettings.cs" />
-    <Compile Include="Core\DataFetcher.cs" />
-    <Compile Include="Core\TranscriptionFetcher.cs" />
+    <Compile Include="Core\Fetchers\AudioFetcherWordHunt.cs" />
+    <Compile Include="Core\Fetchers\DataFetcher.cs" />
+    <Compile Include="Core\Fetchers\ExamplesFetcherReverso.cs" />
+    <Compile Include="Core\Fetchers\TranscriptionFetcherTopPhonetics.cs" />
     <Compile Include="Core\Parser.cs" />
+    <Compile Include="Core\Fetchers\TranslateFetcherReverso.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

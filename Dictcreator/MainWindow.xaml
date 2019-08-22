@@ -278,8 +278,8 @@
             Grid.Row="18"
             Margin="5"
             Background="Green"
-            Foreground="White"
-            Content="Запустить" Click="ClickStartButton"/>
+            Foreground="#FFFF6C6C"
+            Content="Запустить" Click="ClickStartButton" IsEnabled="False"/>
         <Button
             x:Name="cancelButton"
             Grid.Column="2" 
