@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -9,55 +10,121 @@ namespace Dictcreator.Core
 {
     public class Parser
     {
-        private static List<DataFetcher> _dataFetcher;
+        public event ProcessStarted OnProcessStared;
+        public event ProcessCompleted OnProcessCompleted;
+        public event ProcessIndexStep OnProcessIndexStep;
+        public event ProcessWordStep OnProcessWordStep;
+        public event ProcessCanceled OnProcessCanceled;
 
-        static Parser()
+        private List<DataFetcher> _dataFetcher;
+        private CancellationTokenSource _tokenSource;
+        private CancellationToken _cancelToken;
+
+        public CancellationToken CancelToken { get => _cancelToken; private set => _cancelToken = value; }
+        public CancellationTokenSource TokenSource { get => _tokenSource; private set => _tokenSource = value; }
+
+        public Parser()
         {
             _dataFetcher = new List<DataFetcher>();
             _dataFetcher.Add(new TranscriptionFetcher());
+            TokenSource = new CancellationTokenSource();
+            CancelToken = TokenSource.Token;
         }
 
-        public static async Task<bool> RunAsync()
+        public async Task<bool> RunAsync()
         {
             if (CheckSettings())
             {
-                await Task.Run(() => Run());
-                return true;
+                try
+                {
+                    await Task.Run(() => Run(), CancelToken);
+                }
+                catch (Exception e)
+                {
+                    if (e is OperationCanceledException)
+                    {
+                        if (OnProcessCanceled != null)
+                        {
+                            OnProcessCanceled();
+                        }
+
+                        MessageBox.Show("Операция отменена пользователем", "Работа приложения");
+                    }
+                }
+                finally
+                {
+                    TokenSource.Dispose();
+                }
             }
             else
             {
                 return false;
-            }  
+            }
+
+            return true;
         }
-        public static void Run()
+        public void Run()
         {
             ReadWriteFile();
         }
 
-        private static bool CheckSettings()
+        private bool CheckSettings()
         {
             return true;
         }
 
-        private static void ReadWriteFile()
+        private void ReadWriteFile()
         {
+            if (OnProcessStared != null)
+            {
+                OnProcessStared();
+            }
+
+            CancelToken.ThrowIfCancellationRequested();
+
             string[] testArr = new string[]{"run", "home", "dog", "task"};
 
             for (int i = 0; i < testArr.Length; i++)
             {
+                if (OnProcessIndexStep != null)
+                {
+                    OnProcessIndexStep(i);
+                }
+                if (OnProcessWordStep != null)
+                {
+                    OnProcessWordStep(testArr[i]);
+                }
+
+                Thread.Sleep(1000);
+
+                if (CancelToken.IsCancellationRequested)
+                {
+                    CancelToken.ThrowIfCancellationRequested();
+                }
+
                 WriteIndex(i);
 
                 foreach (DataFetcher fetcher in _dataFetcher)
                 {
                     string result = fetcher.GetResult(testArr[i]);
-                    MessageBox.Show(result);
                 }
+            }
+
+            if (OnProcessCompleted != null)
+            {
+                OnProcessCompleted();
             }
         }
 
-        private static void WriteIndex(int index)
+        private void WriteIndex(int index)
         {
 
         }
     }
+
+    public delegate void ProcessStarted();
+    public delegate void ProcessCanceled();
+    public delegate void ProcessCompleted();
+    public delegate void ProcessIndexStep(int index);
+    public delegate void ProcessWordStep(string word);
 }

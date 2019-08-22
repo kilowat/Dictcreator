@@ -25,6 +25,7 @@ namespace Dictcreator
     public partial class MainWindow : Window
     {
         private OpenFileDialog _openFielDialog;
+        private Parser _parser;
         public MainWindow()
         {
             InitializeComponent();
@@ -33,12 +34,12 @@ namespace Dictcreator
 
         private void ClickStartButton(object sender, RoutedEventArgs e)
         {
-            var result = Parser.RunAsync();
+           var result = _parser.RunAsync();
         }
 
         private void ClickCancelButton(object sender, RoutedEventArgs e)
         {
-
+            _parser.TokenSource.Cancel();
         }
 
         private void ClickSelectTableButton(object sender, RoutedEventArgs e)
@@ -69,6 +70,57 @@ namespace Dictcreator
             AppSettings.Instance.ColMerWebster = colMerWebster.Text;
             AppSettings.Instance.StartNumberIndex = Int32.Parse(startNumberIndex.Text);
             AppSettings.Instance.EndNumberIndex = Int32.Parse(endNumberIndex.Text);
+
+            _parser = new Parser();
+            _parser.OnProcessStared += OnProcessStartedHandler;
+            _parser.OnProcessCompleted += OnProcessCompletedHandler;
+            _parser.OnProcessIndexStep += OnProcessIndexStepHandler;
+            _parser.OnProcessWordStep += OnProcessWordStepHandler;
+            _parser.OnProcessCanceled += OnProcessCanceledHandler;
+        }
+
+        private void OnProcessCanceledHandler()
+        {
+            this.Dispatcher.Invoke(() => {
+
+            });
+        }
+
+        private void OnProcessWordStepHandler(string word)
+        {
+            this.Dispatcher.Invoke(() => {
+                processStatusTextBlock.Text = word;
+            });
+        }
+
+        private void OnProcessIndexStepHandler(int index)
+        {
+            this.Dispatcher.Invoke(() => {
+                indexCurrentProcessTextBox.Text = index.ToString();
+            });
+        }
+
+        private void OnProcessCompletedHandler()
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                startButton.IsEnabled = true;
+                cancelButton.IsEnabled = false;
+                processStatusTextBlock.Text = "Процесс завершен";
+                processStatusTextBlock.Foreground = new SolidColorBrush(Colors.Orange);
+                indexCurrentProcessTextBox.Text = "0";
+            });
+        }
+
+        private void OnProcessStartedHandler()
+        {
+            this.Dispatcher.Invoke(()=> 
+            {
+                startButton.IsEnabled = false;
+                cancelButton.IsEnabled = true;
+                processStatusTextBlock.Text = "Процесс запущен";
+                processStatusTextBlock.Foreground = new SolidColorBrush(Colors.Green);
+            });
         }
 
         private void ColumnSettings_TextChanged(object sender, TextChangedEventArgs e)
