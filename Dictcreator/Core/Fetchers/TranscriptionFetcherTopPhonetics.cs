@@ -13,6 +13,9 @@ namespace Dictcreator.Core.Fetchers
     {
         private string _siteUrl = "https://tophonetics.com/";
         private string _xPathQuery = "//span[@class='transcribed_word']//text()";
+
+        public override CellType CellExlType => CellType.STRING;
+
         protected override ColumnName ColName => ColumnName.TRANSCRIPTION;
 
         public override string GetResult(string word)

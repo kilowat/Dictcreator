@@ -37,6 +37,10 @@ namespace Dictcreator.Core
             _dataFetcher.Add(new TranslateFetcherReverso());
             _dataFetcher.Add(new ExamplesFetcherReverso());
             _dataFetcher.Add(new AudioFetcherWordHunt());
+            _dataFetcher.Add(new LinkFetcherMerriemWebster());
+            _dataFetcher.Add(new LinkFetcherReverso());
+            _dataFetcher.Add(new LinkFetcherWordHunt());
+            _dataFetcher.Add(new LinkFetcherYouglish());
 
             TokenSource = new CancellationTokenSource();
             CancelToken = TokenSource.Token;
@@ -118,6 +122,15 @@ namespace Dictcreator.Core
                 foreach (DataFetcher fetcher in _dataFetcher)
                 {
                     string result = fetcher.GetResult(testArr[i]);
+
+                    if (fetcher.CellExlType == CellType.STRING)
+                    {
+
+                    }
+                    else if (fetcher.CellExlType == CellType.LINK)
+                    {
+
+                    }
                 }
             }
 

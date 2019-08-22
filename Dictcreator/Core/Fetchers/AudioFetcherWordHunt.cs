@@ -10,6 +10,9 @@ namespace Dictcreator.Core.Fetchers
     public class AudioFetcherWordHunt : DataFetcher
     {
         private string _urlPath = "https://wooordhunt.ru/data/sound/word/us/mp3/";
+
+        public override CellType CellExlType => CellType.LINK;
+
         protected override ColumnName ColName => ColumnName.AUDIO;
 
         public override string GetResult(string word)

@@ -13,6 +13,9 @@ namespace Dictcreator.Core.Fetchers
     {
         private string _siteUrl = "https://context.reverso.net/translation/english-russian/";
         private string _xPathQueryList = "//div[@class='example']";
+
+        public override CellType CellExlType => CellType.STRING;
+
         protected override ColumnName ColName => ColumnName.EXAMPLES;
 
         public override string GetResult(string word)

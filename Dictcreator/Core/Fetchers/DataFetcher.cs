@@ -8,6 +8,7 @@ namespace Dictcreator.Core.Fetchers
 {
     public abstract class DataFetcher
     {
+        public abstract CellType CellExlType { get; }
         protected abstract ColumnName ColName { get; }
 
         public int ColIndex
@@ -15,5 +16,11 @@ namespace Dictcreator.Core.Fetchers
             get { return AppSettings.Instance.ColumnNameIndexMap[ColName]; }
          }
         public abstract string  GetResult(string word);
+    }
+
+    public enum CellType
+    {
+        STRING,
+        LINK
     }
 }
