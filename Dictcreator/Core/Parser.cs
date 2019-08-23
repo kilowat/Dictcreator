@@ -112,8 +112,11 @@ namespace Dictcreator.Core
             _xlWorksheet = _xlWorkbook.Sheets[AppSettings.Instance.SheetIndex];
             _xlRange = _xlWorksheet.UsedRange;
 
+            var number = AppSettings.Instance.StartNumberIndex - 1;
+
             for (int i = AppSettings.Instance.StartNumberIndex; i <= AppSettings.Instance.EndNumberIndex; i++)
             {
+                number++;
                 var colWordIndex = AppSettings.Instance.ColumnNameIndexMap[ColumnName.WORD];
 
                 if (_xlRange.Cells[i, colWordIndex].Value2 == null) continue;
@@ -167,7 +170,7 @@ namespace Dictcreator.Core
 
         private void WriteIndex(int index)
         {
-
+            _xlWorksheet.Cells[index, AppSettings.Instance.ColumnNameIndexMap[ColumnName.NUMBER]] = index.ToString();
         }
 
         private void CloseAndSaveExcelFile()
