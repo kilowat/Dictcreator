@@ -43,7 +43,7 @@ namespace Dictcreator.Core
 
             _dataFetcher.Add(new TranscriptionFetcherWordHunt());
             _dataFetcher.Add(new TranslateFetcherReverso());
-            _dataFetcher.Add(new ExamplesFetcherReverso());
+            _dataFetcher.Add(new ExamplesFetcherWoordHunt());
             _dataFetcher.Add(new AudioFetcherWordHunt());
             _dataFetcher.Add(new LinkFetcherMerriemWebster());
             _dataFetcher.Add(new LinkFetcherReverso());
@@ -72,6 +72,13 @@ namespace Dictcreator.Core
                         }
 
                         MessageBox.Show("Операция отменена пользователем", "Работа приложения");
+                    }
+                    else
+                    {
+                        MessageBox.Show(e.Message, "Произошла обшика");
+
+                        if (OnProcessCompleted != null)
+                            OnProcessCompleted();
                     }
                 }
                 finally

@@ -70,6 +70,7 @@
     <Compile Include="Core\Fetchers\AudioFetcherWordHunt.cs" />
     <Compile Include="Core\Fetchers\DataFetcher.cs" />
     <Compile Include="Core\Fetchers\ExamplesFetcherReverso.cs" />
+    <Compile Include="Core\Fetchers\ExamplesFetcherWoordHunt.cs" />
     <Compile Include="Core\Fetchers\LinkFetcherMerriemWebster.cs" />
     <Compile Include="Core\Fetchers\LinkFetcherReverso.cs" />
     <Compile Include="Core\Fetchers\LinkFetcherWordHunt.cs" />
