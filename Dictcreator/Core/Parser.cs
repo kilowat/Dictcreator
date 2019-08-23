@@ -41,7 +41,7 @@ namespace Dictcreator.Core
         {
             _dataFetcher = new List<DataFetcher>();
 
-            //_dataFetcher.Add(new TranscriptionFetcherTopPhonetics());
+            _dataFetcher.Add(new TranscriptionFetcherWordHunt());
             _dataFetcher.Add(new TranslateFetcherReverso());
             _dataFetcher.Add(new ExamplesFetcherReverso());
             _dataFetcher.Add(new AudioFetcherWordHunt());
@@ -140,6 +140,8 @@ namespace Dictcreator.Core
 
                 foreach (DataFetcher fetcher in _dataFetcher)
                 {
+                    if (fetcher.ColIndex == -1) continue;
+
                     if (i % AppSettings.Instance.EveryIterSave == 1) _xlWorkbook.Save();
 
                     string result = fetcher.GetResult(currentWord);
@@ -151,7 +153,7 @@ namespace Dictcreator.Core
                     else if (fetcher.CellExlType == CellType.LINK)
                     {
                         var fCell = (Excel.Range)_xlWorksheet.get_Range(AppSettings.Instance.ColIndexCharMap[fetcher.ColIndex] + i);
-                       _xlWorksheet.Hyperlinks.Add(fCell, result + currentWord, Type.Missing, fetcher.ServiceName+"/" + currentWord, fetcher.ServiceName+"/" + currentWord);
+                       _xlWorksheet.Hyperlinks.Add(fCell, result, Type.Missing, fetcher.ServiceName+"/" + currentWord, fetcher.ServiceName+"/" + currentWord);
 
                     }
                 }

@@ -55,6 +55,8 @@ namespace Dictcreator
             get => _colNumberIndex;
             set
             {
+                if(value.Length == 0) value = "EMPTY";
+
                 _colNumberIndex = value;
                 ColumnNameIndexMap[ColumnName.NUMBER] = ColCharIndexMap[value];
             }
@@ -73,6 +75,8 @@ namespace Dictcreator
             get => _colTranscript;
             set
             {
+                if (value.Length == 0) value = "EMPTY";
+
                 _colTranscript = value;
                 ColumnNameIndexMap[ColumnName.TRANSCRIPTION] = ColCharIndexMap[value];
             }
@@ -82,6 +86,8 @@ namespace Dictcreator
             get => _colTranslation;
             set
             {
+                if (value.Length == 0) value = "EMPTY";
+
                 _colTranslation = value;
                 ColumnNameIndexMap[ColumnName.TRANSLATE] = ColCharIndexMap[value];
             }
@@ -91,6 +97,8 @@ namespace Dictcreator
             get => _colExamples;
             set
             {
+                if (value.Length == 0) value = "EMPTY";
+
                 _colExamples = value;
                 ColumnNameIndexMap[ColumnName.EXAMPLES] = ColCharIndexMap[value];
             }
@@ -101,6 +109,8 @@ namespace Dictcreator
             get => _colAudio;
             set
             {
+                if (value.Length == 0) value = "EMPTY";
+
                 _colAudio = value;
                 ColumnNameIndexMap[ColumnName.AUDIO] = ColCharIndexMap[value];
             }
@@ -110,6 +120,7 @@ namespace Dictcreator
             get => _colYouglish;
             set
             {
+                if (value.Length == 0) value = "EMPTY";
                 _colYouglish = value;
                 ColumnNameIndexMap[ColumnName.YOUGLISH] = ColCharIndexMap[value];
             }
@@ -119,6 +130,8 @@ namespace Dictcreator
             get => _colContextReverso;
             set
             {
+                if (value.Length == 0) value = "EMPTY";
+
                 _colContextReverso = value;
                 ColumnNameIndexMap[ColumnName.REVERSO] = ColCharIndexMap[value];
             }
@@ -128,6 +141,8 @@ namespace Dictcreator
             get => _colWoordHunt;
             set
             {
+                if (value.Length == 0) value = "EMPTY";
+
                 _colWoordHunt = value;
                 ColumnNameIndexMap[ColumnName.WORD_HUNT] = ColCharIndexMap[value];
             }
@@ -137,6 +152,8 @@ namespace Dictcreator
             get => _colMerWebster;
             set
             {
+                if (value.Length == 0) value = "EMPTY";
+
                 _colMerWebster = value;
                 ColumnNameIndexMap[ColumnName.MERRIAM_WEBSTER] = ColCharIndexMap[value];
             }
@@ -220,12 +237,17 @@ namespace Dictcreator
         private void InitColCharIndexMap()
         {
             int i = 1;
+
             for (char letter = 'A'; letter <= 'Z'; letter++)
             {
                 ColCharIndexMap[letter.ToString()] = i;
                 ColIndexCharMap[i] = letter.ToString();
                 i++;
             }
+
+            //Empty col index
+            ColCharIndexMap["EMPTY"] = -1;
+            ColIndexCharMap[-1] = "EMPTY";
         }
     }
 

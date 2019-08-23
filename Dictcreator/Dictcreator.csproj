@@ -75,6 +75,7 @@
     <Compile Include="Core\Fetchers\LinkFetcherWordHunt.cs" />
     <Compile Include="Core\Fetchers\LinkFetcherYouglish.cs" />
     <Compile Include="Core\Fetchers\TranscriptionFetcherTopPhonetics.cs" />
+    <Compile Include="Core\Fetchers\TranscriptionFetcherWordHunt.cs" />
     <Compile Include="Core\Parser.cs" />
     <Compile Include="Core\Fetchers\TranslateFetcherReverso.cs" />
     <Compile Include="MainWindow.xaml.cs">

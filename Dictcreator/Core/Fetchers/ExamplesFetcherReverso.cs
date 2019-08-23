@@ -49,7 +49,7 @@ namespace Dictcreator.Core.Fetchers
                     {
                         if (count > AppSettings.Instance.MaxExample) break;
 
-                        examplesList.Add(Regex.Replace(item.InnerText, "\n", "").Trim());
+                        examplesList.Add(Regex.Replace(item.InnerText, "&СИМВОЛ(10)&", "").Trim());
 
                         count++;
                     }
