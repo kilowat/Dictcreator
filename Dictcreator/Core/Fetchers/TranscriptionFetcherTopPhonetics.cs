@@ -16,6 +16,8 @@ namespace Dictcreator.Core.Fetchers
 
         public override CellType CellExlType => CellType.STRING;
 
+        public override string ServiceName => "TopPhonetics";
+
         protected override ColumnName ColName => ColumnName.TRANSCRIPTION;
 
         public override string GetResult(string word)

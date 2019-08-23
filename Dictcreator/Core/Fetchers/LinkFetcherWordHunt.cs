@@ -10,6 +10,8 @@ namespace Dictcreator.Core.Fetchers
     {
         public override CellType CellExlType => CellType.LINK;
 
+        public override string ServiceName => "WordHunt";
+
         protected override ColumnName ColName => ColumnName.WORD_HUNT;
 
         public override string GetResult(string word)

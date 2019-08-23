@@ -18,6 +18,8 @@ namespace Dictcreator.Core.Fetchers
 
         public override CellType CellExlType => CellType.STRING;
 
+        public override string ServiceName => "Reverso";
+
         protected override ColumnName ColName => ColumnName.TRANSLATE;
 
         public override string GetResult(string word)

@@ -1,7 +1,9 @@
 ﻿using Dictcreator.Core.Fetchers;
+using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,15 +14,20 @@ namespace Dictcreator.Core
 {
     public class Parser
     {
+        private List<DataFetcher> _dataFetcher;
+        private CancellationTokenSource _tokenSource;
+        private CancellationToken _cancelToken;
+
+        private Excel.Application _xlApp;
+        private Excel.Workbook _xlWorkbook;
+        private Excel._Worksheet _xlWorksheet;
+        private Excel.Range _xlRange;
+
         public event ProcessStarted OnProcessStared;
         public event ProcessCompleted OnProcessCompleted;
         public event ProcessIndexStep OnProcessIndexStep;
         public event ProcessWordStep OnProcessWordStep;
         public event ProcessCanceled OnProcessCanceled;
-
-        private List<DataFetcher> _dataFetcher;
-        private CancellationTokenSource _tokenSource;
-        private CancellationToken _cancelToken;
 
         public CancellationToken CancelToken { get => _cancelToken; private set => _cancelToken = value; }
         public CancellationTokenSource TokenSource { get => _tokenSource; private set => _tokenSource = value; }
@@ -34,7 +41,7 @@ namespace Dictcreator.Core
         {
             _dataFetcher = new List<DataFetcher>();
 
-            _dataFetcher.Add(new TranscriptionFetcherTopPhonetics());
+            //_dataFetcher.Add(new TranscriptionFetcherTopPhonetics());
             _dataFetcher.Add(new TranslateFetcherReverso());
             _dataFetcher.Add(new ExamplesFetcherReverso());
             _dataFetcher.Add(new AudioFetcherWordHunt());
@@ -70,6 +77,7 @@ namespace Dictcreator.Core
                 finally
                 {
                     TokenSource.Dispose();
+                    CloseAndSaveExcelFile();
                 }
             }
             else
@@ -98,16 +106,19 @@ namespace Dictcreator.Core
 
             CancelToken.ThrowIfCancellationRequested();
 
-            Excel.Application xlApp = new Excel.Application();
-            Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(AppSettings.Instance.FileXlsPath);
-            Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
-            Excel.Range xlRange = xlWorksheet.UsedRange;
+            _xlApp = new Excel.Application();
+            _xlWorkbook = _xlApp.Workbooks.Open(AppSettings.Instance.FileXlsPath);
+
+            _xlWorksheet = _xlWorkbook.Sheets[AppSettings.Instance.SheetIndex];
+            _xlRange = _xlWorksheet.UsedRange;
 
             for (int i = AppSettings.Instance.StartNumberIndex; i <= AppSettings.Instance.EndNumberIndex; i++)
             {
                 var colWordIndex = AppSettings.Instance.ColumnNameIndexMap[ColumnName.WORD];
 
-                var currentWord = xlRange.Cells[i, colWordIndex].Value2.ToString();
+                if (_xlRange.Cells[i, colWordIndex].Value2 == null) continue;
+
+                var currentWord = _xlRange.Cells[i, colWordIndex].Value2.ToString();
 
                 if (OnProcessIndexStep != null)
                 {
@@ -129,14 +140,18 @@ namespace Dictcreator.Core
 
                 foreach (DataFetcher fetcher in _dataFetcher)
                 {
+                    if (i % AppSettings.Instance.EveryIterSave == 1) _xlWorkbook.Save();
+
                     string result = fetcher.GetResult(currentWord);
 
                     if (fetcher.CellExlType == CellType.STRING)
                     {
-
+                        _xlWorksheet.Cells[i, fetcher.ColIndex] = result;
                     }
                     else if (fetcher.CellExlType == CellType.LINK)
                     {
+                        var fCell = (Excel.Range)_xlWorksheet.get_Range(AppSettings.Instance.ColIndexCharMap[fetcher.ColIndex] + i);
+                       _xlWorksheet.Hyperlinks.Add(fCell, result + currentWord, Type.Missing, fetcher.ServiceName+"/" + currentWord, fetcher.ServiceName+"/" + currentWord);
 
                     }
                 }
@@ -151,6 +166,32 @@ namespace Dictcreator.Core
         private void WriteIndex(int index)
         {
 
+        }
+
+        private void CloseAndSaveExcelFile()
+        {
+            if (_xlWorkbook != null)
+                _xlWorkbook.Save();
+
+            //cleanup
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
+            //rule of thumb for releasing com objects:
+            //  never use two dots, all COM objects must be referenced and released individually
+            //  ex: [somthing].[something].[something] is bad
+
+            //release com objects to fully kill excel process from running in the background
+            Marshal.ReleaseComObject(_xlRange);
+            Marshal.ReleaseComObject(_xlWorksheet);
+
+            //close and release
+            _xlWorkbook.Close();
+            Marshal.ReleaseComObject(_xlWorkbook);
+
+            //quit and release
+            _xlApp.Quit();
+            Marshal.ReleaseComObject(_xlApp);
         }
     }
 

@@ -15,7 +15,7 @@ namespace Dictcreator
 
         private Dictionary<ColumnName, int> _columnNameIndexMap = new Dictionary<ColumnName, int>();
         private Dictionary<string, int> _colCharIndexMap = new Dictionary<string, int>();
-
+        private Dictionary<int, string> _colIndexCharMap = new Dictionary<int, string>();
         private string _audioDirName = "audio";
 
         private string _fileXlsPath = string.Empty;
@@ -33,6 +33,9 @@ namespace Dictcreator
         private int _startNumberIndex = 1;
         private int _endNumberIndex = 100;
         private string _pathToAudio = string.Empty;
+        private int _everyIterSave = 10;
+        private int _sheetIndex = 1;
+
         public static AppSettings Instance
         {
             private set { }
@@ -74,14 +77,70 @@ namespace Dictcreator
                 ColumnNameIndexMap[ColumnName.TRANSCRIPTION] = ColCharIndexMap[value];
             }
         }
-        public string ColTranslation { get => _colTranslation; set => _colTranslation = value; }
-        public string ColExamples { get => _colExamples; set => _colExamples = value; }
+        public string ColTranslation
+        {
+            get => _colTranslation;
+            set
+            {
+                _colTranslation = value;
+                ColumnNameIndexMap[ColumnName.TRANSLATE] = ColCharIndexMap[value];
+            }
+        }
+        public string ColExamples
+        {
+            get => _colExamples;
+            set
+            {
+                _colExamples = value;
+                ColumnNameIndexMap[ColumnName.EXAMPLES] = ColCharIndexMap[value];
+            }
+        }
         public int MaxExample { get => _maxExample; set => _maxExample = value; }
-        public string ColAudio { get => _colAudio; set => _colAudio = value; }
-        public string ColYouglish { get => _colYouglish; set => _colYouglish = value; }
-        public string ColContextReverso { get => _colContextReverso; set => _colContextReverso = value; }
-        public string ColWoordHunt { get => _colWoordHunt; set => _colWoordHunt = value; }
-        public string ColMerWebster { get => _colMerWebster; set => _colMerWebster = value; }
+        public string ColAudio
+        {
+            get => _colAudio;
+            set
+            {
+                _colAudio = value;
+                ColumnNameIndexMap[ColumnName.AUDIO] = ColCharIndexMap[value];
+            }
+        }
+        public string ColYouglish
+        {
+            get => _colYouglish;
+            set
+            {
+                _colYouglish = value;
+                ColumnNameIndexMap[ColumnName.YOUGLISH] = ColCharIndexMap[value];
+            }
+        }
+        public string ColContextReverso
+        {
+            get => _colContextReverso;
+            set
+            {
+                _colContextReverso = value;
+                ColumnNameIndexMap[ColumnName.REVERSO] = ColCharIndexMap[value];
+            }
+        }
+        public string ColWoordHunt
+        {
+            get => _colWoordHunt;
+            set
+            {
+                _colWoordHunt = value;
+                ColumnNameIndexMap[ColumnName.WORD_HUNT] = ColCharIndexMap[value];
+            }
+        }
+        public string ColMerWebster
+        {
+            get => _colMerWebster;
+            set
+            {
+                _colMerWebster = value;
+                ColumnNameIndexMap[ColumnName.MERRIAM_WEBSTER] = ColCharIndexMap[value];
+            }
+        }
         public int StartNumberIndex
         {
             get => _startNumberIndex; 
@@ -125,6 +184,31 @@ namespace Dictcreator
         }
 
         public string AudioDirName { get => _audioDirName; private set => _audioDirName = value; }
+        public int EveryIterSave
+        {
+            get
+            {
+                return _everyIterSave;
+            }
+            set
+            {
+                _everyIterSave = value;
+            }
+        }
+
+        public int SheetIndex
+        {
+            get
+            {
+                return _sheetIndex;
+            }
+            set
+            {
+                _sheetIndex = value;
+            }
+        }
+
+        public Dictionary<int, string> ColIndexCharMap { get => _colIndexCharMap; private set => _colIndexCharMap = value; }
 
         #endregion
 
@@ -139,6 +223,7 @@ namespace Dictcreator
             for (char letter = 'A'; letter <= 'Z'; letter++)
             {
                 ColCharIndexMap[letter.ToString()] = i;
+                ColIndexCharMap[i] = letter.ToString();
                 i++;
             }
         }

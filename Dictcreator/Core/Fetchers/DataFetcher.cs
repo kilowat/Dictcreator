@@ -8,6 +8,7 @@ namespace Dictcreator.Core.Fetchers
 {
     public abstract class DataFetcher
     {
+        public abstract string ServiceName { get; }
         public abstract CellType CellExlType { get; }
         protected abstract ColumnName ColName { get; }
 

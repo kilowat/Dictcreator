@@ -13,6 +13,8 @@ namespace Dictcreator.Core.Fetchers
 
         public override CellType CellExlType => CellType.LINK;
 
+        public override string ServiceName => "Audio";
+
         protected override ColumnName ColName => ColumnName.AUDIO;
 
         public override string GetResult(string word)
