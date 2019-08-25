@@ -191,7 +191,8 @@ namespace Dictcreator.Core
 
         private void WriteIndex(int index)
         {
-            _xlWorksheet.Cells[index, AppSettings.Instance.ColumnNameIndexMap[ColumnName.NUMBER]] = index.ToString();
+            if(AppSettings.Instance.ColumnNameIndexMap[ColumnName.NUMBER] > 0)
+                _xlWorksheet.Cells[index, AppSettings.Instance.ColumnNameIndexMap[ColumnName.NUMBER]] = index.ToString();
         }
 
         private void CloseAndSaveExcelFile()
