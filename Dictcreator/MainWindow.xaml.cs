@@ -32,6 +32,16 @@ namespace Dictcreator
             InitApp();
         }
 
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            if (_parser.IsWorked)
+            {
+                _parser.StopOperation();
+            }
+
+            base.OnClosing(e);
+        }
+
         private void ClickStartButton(object sender, RoutedEventArgs e)
         {
            InitSettings();
@@ -41,7 +51,7 @@ namespace Dictcreator
 
         private void ClickCancelButton(object sender, RoutedEventArgs e)
         {
-            _parser.TokenSource.Cancel();
+            _parser.CancelOperation();
         }
 
         private void ClickSelectTableButton(object sender, RoutedEventArgs e)
@@ -90,6 +100,9 @@ namespace Dictcreator
         {
             this.Dispatcher.Invoke(() => {
                 progress.Value = 0;
+                startButton.IsEnabled = true;
+                cancelButton.IsEnabled = false;
+                processStatusTextBlock.Text = "Отменено";
             });
         }
 

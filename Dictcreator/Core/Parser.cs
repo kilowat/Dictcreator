@@ -23,6 +23,8 @@ namespace Dictcreator.Core
         private Excel._Worksheet _xlWorksheet;
         private Excel.Range _xlRange;
 
+        private bool _isWorked;
+
         public event ProcessStarted OnProcessStared;
         public event ProcessCompleted OnProcessCompleted;
         public event ProcessIndexStep OnProcessIndexStep;
@@ -31,11 +33,13 @@ namespace Dictcreator.Core
 
         public CancellationToken CancelToken { get => _cancelToken; private set => _cancelToken = value; }
         public CancellationTokenSource TokenSource { get => _tokenSource; private set => _tokenSource = value; }
+        public bool IsWorked { get => _isWorked; private set => _isWorked = value; }
 
         public Parser()
         {
             InitParser();
         }
+
 
         private void InitParser()
         {
@@ -49,9 +53,6 @@ namespace Dictcreator.Core
             _dataFetcher.Add(new LinkFetcherReverso());
             _dataFetcher.Add(new LinkFetcherWordHunt());
             _dataFetcher.Add(new LinkFetcherYouglish());
-
-            TokenSource = new CancellationTokenSource();
-            CancelToken = TokenSource.Token;
         }
 
         public async Task<bool> RunAsync()
@@ -60,6 +61,9 @@ namespace Dictcreator.Core
             {
                 try
                 {
+                    TokenSource = new CancellationTokenSource();
+                    CancelToken = TokenSource.Token;
+                    IsWorked = true;
                     await Task.Run(() => Run(), CancelToken);
                 }
                 catch (Exception e)
@@ -70,8 +74,6 @@ namespace Dictcreator.Core
                         {
                             OnProcessCanceled();
                         }
-
-                        MessageBox.Show("Операция отменена пользователем", "Работа приложения");
                     }
                     else
                     {
@@ -83,8 +85,7 @@ namespace Dictcreator.Core
                 }
                 finally
                 {
-                    TokenSource.Dispose();
-                    CloseAndSaveExcelFile();
+                    StopOperation();
                 }
             }
             else
@@ -97,6 +98,19 @@ namespace Dictcreator.Core
         public void Run()
         {
             ReadWriteFile();
+        }
+
+        public void CancelOperation()
+        {
+            if(IsWorked)
+                TokenSource.Cancel();
+        }
+
+        public void StopOperation()
+        {
+            TokenSource.Dispose();
+            IsWorked = false;
+            CloseAndSaveExcelFile();
         }
 
         private bool CheckSettings()
