@@ -92,6 +92,7 @@ namespace Dictcreator
             AppSettings.Instance.ColContextReverso = colContextReverso.Text;
             AppSettings.Instance.ColWoordHunt = colWoordHunt.Text;
             AppSettings.Instance.ColMerWebster = colMerWebster.Text;
+            AppSettings.Instance.SheetIndex = Int32.Parse(SheetNumber.Text);
             AppSettings.Instance.StartNumberIndex = Int32.Parse(startNumberIndex.Text);
             AppSettings.Instance.EndNumberIndex = Int32.Parse(endNumberIndex.Text);
         }
@@ -146,23 +147,23 @@ namespace Dictcreator
         }
 
         private void ColumnSettings_TextChanged(object sender, TextChangedEventArgs e)
-        {
+        {      
             TextBox textBox = (TextBox)sender;
-            var match = Regex.Match(textBox.Text, "[A-Z]");
-
+            var match = Regex.Match(textBox.Text, "[aA-zZ]");
+            
             if (textBox.Text.Length > 0)
             {
-                if (!match.Success || textBox.Text.Length > 1)
+                if (!match.Success)
                 {
                     textBox.Text = "A";
                     MessageBox.Show("Значение должно быть в диапозоне A-Z", "Ошибка ввода");
                 }
-            }
-            else if(textBox.Name == "colEnWord")
-            {
-                textBox.Text = "B";
-                MessageBox.Show("Значение колонка слово должно быть указано", "Ошибка ввода");
-            }
+                if (textBox.Text.Length > 1)
+                {
+                    textBox.Text = "A";
+                    MessageBox.Show("Можно ввести только одну букву", "Ошибка ввода");
+                }
+            }   
         }
     }
 }

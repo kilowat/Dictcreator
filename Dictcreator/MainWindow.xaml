@@ -6,21 +6,23 @@
         xmlns:local="clr-namespace:Dictcreator"
         mc:Ignorable="d"
         Title="Dictcreator"
-        Height="800" 
+        Height="840" 
         Width="480"
         ResizeMode="NoResize"
         FontSize="16">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="151*"/>
+            <ColumnDefinition Width="66*"/>
+            <ColumnDefinition Width="217*"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="40" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
@@ -44,44 +46,47 @@
             Content="Выбрать таблицу" 
             Grid.Row="1" 
             Grid.Column="1"
-            Margin="0, 0, 10, 0" Background="#FFFDE449" Click="ClickSelectTableButton"/>
+            Margin="0, 0, 10, 0" Background="#FFFDE449" Click="ClickSelectTableButton" Grid.ColumnSpan="2"/>
         <TextBlock
             x:Name="selectFielTextBox"
             Text="Файл не выбран" 
             Grid.Row="1" 
-            Grid.Column="2"/>
+            Grid.Column="3"/>
 
         <TextBlock 
             Text="Колонка номер:" 
             Grid.Column="1" 
             Grid.Row="2" 
-            Margin="0,8,0,0"/>
+            Margin="0,8,0,0" Grid.ColumnSpan="2"/>
         <TextBox 
             x:Name="colNumberIndex"   
             Text="A"  
-            Grid.Column="2"
+            Grid.Column="3"
             Margin="0,10,166,6"
             TextAlignment="Center"     
             Grid.Row="2" 
-            TextChanged="ColumnSettings_TextChanged"/>
+            FontSize="18"
+            Typography.Capitals="AllSmallCaps"
+            TextChanged="ColumnSettings_TextChanged" RenderTransformOrigin="0.51,0.375" FontFamily="Arial"/>
 
         <TextBlock 
             Text="Колонка слово:" 
             Grid.Column="1" 
             Grid.Row="3" 
-            Margin="0,8,0,0"/>
+            Margin="0,8,0,0" Grid.ColumnSpan="2"/>
         <TextBox 
             Text="B"
             x:Name="colEnWord"
-            Grid.Column="2"
+            Grid.Column="3"
             Margin="0,10,166,6"
             TextAlignment="Center"     
             Grid.Row="3"
-            TextChanged="ColumnSettings_TextChanged"/>
+            Typography.Capitals="AllSmallCaps"
+            TextChanged="ColumnSettings_TextChanged" FontFamily="Arial"/>
 
         <TextBlock Text="В этой колонке должны &#x0a; быть английские слова" 
             FontSize="13"
-            Grid.Column="2"
+            Grid.Column="3"
             Margin="64,0,10,0"
             TextAlignment="Left"
             Foreground="Red"
@@ -91,199 +96,220 @@
             Text="Колонка транc-ция:" 
             Grid.Column="1" 
             Grid.Row="4" 
-            Margin="0,8,0,0"/>
+            Margin="0,8,0,0" Grid.ColumnSpan="2"/>
         <TextBox 
             x:Name="colTranscript"
             Text="C"
-            Grid.Column="2"
+            Grid.Column="3"
             Margin="0,10,166,6"
             TextAlignment="Center"     
             Grid.Row="4"
-            TextChanged="ColumnSettings_TextChanged"/>
+            Typography.Capitals="AllSmallCaps"
+            TextChanged="ColumnSettings_TextChanged" FontFamily="Arial"/>
 
         <TextBlock 
             Text="Колонка перевод:" 
             Grid.Column="1" 
             Grid.Row="5" 
-            Margin="0,8,0,0"/>
+            Margin="0,8,0,0" Grid.ColumnSpan="2"/>
         <TextBox 
             Text="D" 
             x:Name="colTranslation"
-            Grid.Column="2"
+            Grid.Column="3"
             Margin="0,10,166,6"
             TextAlignment="Center"     
             Grid.Row="5"
-            TextChanged="ColumnSettings_TextChanged"/>
+            Typography.Capitals="AllSmallCaps"
+            TextChanged="ColumnSettings_TextChanged" FontFamily="Arial"/>
 
         <TextBlock 
             Text="Колонка примеры:" 
             Grid.Column="1" 
             Grid.Row="6" 
-            Margin="0,8,0,0"/>
+            Margin="0,8,0,0" Grid.ColumnSpan="2"/>
         <TextBox
             x:Name="colExamples"
             Text="E" 
-            Grid.Column="2"
+            Grid.Column="3"
             Margin="0,10,166,6"
             TextAlignment="Center"     
             Grid.Row="6"
-            TextChanged="ColumnSettings_TextChanged"/>
+            Typography.Capitals="AllSmallCaps"
+            TextChanged="ColumnSettings_TextChanged" FontFamily="Arial"/>
         <TextBlock
             Text="Макс:" 
-            Grid.Column="2" 
+            Grid.Column="3" 
             Grid.Row="6" 
             Margin="56,10,109,0"/>
         <TextBox 
             x:Name="maxExample"
             Text="2" 
-            Grid.Column="2"
+            Grid.Column="3"
             Margin="108,10,58,6"
             TextAlignment="Center"     
             Grid.Row="6"/>
-        
+
         <TextBlock 
             Text="Колонка аудио:" 
             Grid.Column="1" 
             Grid.Row="7" 
-            Margin="0,8,0,0"/>
+            Margin="0,8,0,0" Grid.ColumnSpan="2"/>
         <TextBox
             x:Name="colAudio"
             Text="F" 
-            Grid.Column="2"
+            Grid.Column="3"
             Margin="0,10,166,6"
             TextAlignment="Center"     
             Grid.Row="7"
-            TextChanged="ColumnSettings_TextChanged"/>
+            Typography.Capitals="AllSmallCaps"
+            TextChanged="ColumnSettings_TextChanged" FontFamily="Arial"/>
 
         <TextBlock 
             Text="Колонка youglish:" 
             Grid.Column="1" 
             Grid.Row="8" 
-            Margin="0,8,0,0"/>
+            Margin="0,8,0,0" Grid.ColumnSpan="2"/>
         <TextBox
             x:Name="colYouglish"
             Text="G" 
-            Grid.Column="2"
+            Grid.Column="3"
             Margin="0,10,166,6"
             TextAlignment="Center"     
             Grid.Row="8"
-            TextChanged="ColumnSettings_TextChanged"/>
+            Typography.Capitals="AllSmallCaps"
+            TextChanged="ColumnSettings_TextChanged" FontFamily="Arial"/>
 
         <TextBlock 
             Text="Колонка context.reverso:" 
             Grid.Column="1" 
             Grid.Row="9" 
-            Margin="0,8,0,0"/>
+            Margin="0,8,0,0" Grid.ColumnSpan="2"/>
         <TextBox
             x:Name="colContextReverso"
             Text="H" 
-            Grid.Column="2"
+            Grid.Column="3"
             Margin="0,10,166,6"
             TextAlignment="Center"     
             Grid.Row="9"
-            TextChanged="ColumnSettings_TextChanged"/>
+            Typography.Capitals="AllSmallCaps"
+            TextChanged="ColumnSettings_TextChanged" FontFamily="Arial"/>
 
         <TextBlock 
             Text="Колонка wooordhunt:" 
             Grid.Column="1" 
             Grid.Row="10" 
-            Margin="0,8,0,0"/>
+            Margin="0,8,0,0" Grid.ColumnSpan="2"/>
         <TextBox 
             x:Name="colWoordHunt"
             Text="I" 
-            Grid.Column="2"
+            Grid.Column="3"
             Margin="0,10,166,6"
             TextAlignment="Center"     
             Grid.Row="10"
-            TextChanged="ColumnSettings_TextChanged"/>
+            Typography.Capitals="AllSmallCaps"
+            TextChanged="ColumnSettings_TextChanged" FontFamily="Arial"/>
 
         <TextBlock 
             Text="Колонка merriam-webster:" 
             Grid.Column="1" 
             Grid.Row="11" 
-            Margin="0,8,0,0"/>
+            Margin="0,8,0,0" Grid.ColumnSpan="2"/>
         <TextBox 
             x:Name="colMerWebster"
             Text="J" 
-            Grid.Column="2"
+            Grid.Column="3"
             Margin="0,10,166,6"
             TextAlignment="Center"     
             Grid.Row="11"
-            TextChanged="ColumnSettings_TextChanged"/>
-
+            Typography.Capitals="AllSmallCaps"
+            TextChanged="ColumnSettings_TextChanged" FontFamily="Arial"/>
         <TextBlock 
-             Text="Начать с номера строки:" 
+             Text="Порядковый номер листа:" 
              Grid.Column="1" 
              Grid.Row="12" 
              Foreground="Red"
-             Margin="0,8,0,0"/>
+             Margin="0,8,0,0" Grid.ColumnSpan="2"/>
+        <TextBox
+            x:Name="SheetNumber"
+            Text="1" 
+            Grid.Column="3"
+            Margin="0,10,166,6"
+            TextAlignment="Center"   
+            Grid.Row="12" FontSize="16"/>
+        
+        <TextBlock 
+             Text="Начать с номера строки:" 
+             Grid.Column="1" 
+             Grid.Row="13" 
+             Foreground="Red"
+             Margin="0,8,0,0" Grid.ColumnSpan="2"/>
         <TextBox
             x:Name="startNumberIndex"
             Text="1" 
-            Grid.Column="2"
+            Grid.Column="3"
             Margin="0,10,166,6"
-            TextAlignment="Center"     
-            Grid.Row="12"/>
+            TextAlignment="Center"   
+            Grid.Row="13" FontSize="16"/>
 
         <TextBlock 
              Text="Закончить номером:" 
              Grid.Column="1" 
-             Grid.Row="13" 
+             Grid.Row="14" 
              Foreground="Red"
-             Margin="0,8,0,0"/>
+             Margin="0,8,0,0" Grid.ColumnSpan="2"/>
         <TextBox
             x:Name="endNumberIndex"
             Text="100" 
-            Grid.Column="2"
+            Grid.Column="3"
             Margin="0,10,134,6"
             TextAlignment="Center"     
-            Grid.Row="13"/>
+            Grid.Row="14"/>
 
         <TextBlock 
              Text="Обрабатываемый индекс:" 
              Grid.Column="1" 
-             Grid.Row="14" 
+             Grid.Row="15" 
              Foreground="#FFD100FF"
-             Margin="0,8,0,0"/>
+             Margin="0,8,0,0" Grid.ColumnSpan="2"/>
         <TextBlock 
             x:Name="indexCurrentProcessTextBox"
             Text="0" 
-            Grid.Column="2"
+            Grid.Column="3"
             Margin="0,10,166,6"
             TextAlignment="Center"     
-            Grid.Row="14" Foreground="#FFE80000"/>
-        
+            Grid.Row="15" Foreground="#FFE80000"/>
+
         <TextBlock 
              Text="Обрабатываемое слово:" 
              Grid.Column="1" 
-             Grid.Row="15" 
+             Grid.Row="16" 
              Foreground="#FFD100FF"
-             Margin="0,8,0,0"/>
+             Margin="0,8,0,0" Grid.ColumnSpan="2"/>
         <TextBlock 
             x:Name="processStatusTextBlock"
             Text="Процесс не запущен" 
-            Grid.Column="2"
+            Grid.Column="3"
             Margin="0,10,10,6"
             TextAlignment="Center"     
-            Grid.Row="15" Foreground="#FFDA8408"/>
+            Grid.Row="16" Foreground="#FFDA8408"/>
 
         <ProgressBar
             x:Name="progress"
             Grid.Column="1" 
-            Grid.Row="16"
-            Grid.ColumnSpan="2" Value="-3"/>
+            Grid.Row="17"
+            Grid.ColumnSpan="3" Value="-3"/>
         <Button
             x:Name="startButton"
             Grid.Column="1" 
-            Grid.Row="18"
+            Grid.Row="19"
             Margin="5"
             Background="Green"
             Foreground="#FFFF6C6C"
-            Content="Запустить" Click="ClickStartButton" IsEnabled="False"/>
+            Content="Запустить" Click="ClickStartButton" IsEnabled="False" Grid.ColumnSpan="2"/>
         <Button
             x:Name="cancelButton"
-            Grid.Column="2" 
-            Grid.Row="18"
+            Grid.Column="3" 
+            Grid.Row="19"
             Margin="5"
             Background="Cornsilk"
             Content="Отменить"        

@@ -138,11 +138,12 @@ namespace Dictcreator.Core
             for (int i = AppSettings.Instance.StartNumberIndex; i <= AppSettings.Instance.EndNumberIndex; i++)
             {
                 number++;
-                var colWordIndex = AppSettings.Instance.ColumnNameIndexMap[ColumnName.WORD];
 
-                if (_xlRange.Cells[i, colWordIndex].Value2 == null) continue;
+                var curCell = (Excel.Range)_xlWorksheet.get_Range(AppSettings.Instance.ColEnWord + i);
 
-                var currentWord = _xlRange.Cells[i, colWordIndex].Value2.ToString();
+                if (curCell.Value2 == null) continue;
+
+                var currentWord = curCell.Value2;
 
                 if (OnProcessIndexStep != null)
                 {
