@@ -92,6 +92,7 @@ namespace Dictcreator
             AppSettings.Instance.ColContextReverso = colContextReverso.Text;
             AppSettings.Instance.ColWoordHunt = colWoordHunt.Text;
             AppSettings.Instance.ColMerWebster = colMerWebster.Text;
+            AppSettings.Instance.EveryIterSave = Int32.Parse(StepSave.Text);
             AppSettings.Instance.SheetIndex = Int32.Parse(SheetNumber.Text);
             AppSettings.Instance.StartNumberIndex = Int32.Parse(startNumberIndex.Text);
             AppSettings.Instance.EndNumberIndex = Int32.Parse(endNumberIndex.Text);
