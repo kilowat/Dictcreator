@@ -140,7 +140,7 @@
         <TextBlock
             Text="Макс:" 
             Grid.Column="3" 
-            Grid.Row="8" 
+            Grid.Row="7" 
             Margin="76,11,89,39" Grid.RowSpan="2"/>
         <TextBox 
             x:Name="maxExample"
@@ -148,7 +148,7 @@
             Grid.Column="3"
             Margin="123,10,58,6"
             TextAlignment="Center"     
-            Grid.Row="8"/>
+            Grid.Row="7"/>
 
         <TextBlock 
             Text="Колонка аудио:" 
