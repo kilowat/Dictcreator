@@ -17,6 +17,7 @@ namespace Dictcreator
         private Dictionary<string, int> _colCharIndexMap = new Dictionary<string, int>();
         private Dictionary<int, string> _colIndexCharMap = new Dictionary<int, string>();
         private string _audioDirName = "audio";
+        private string _pictureDirName = "picture";
 
         private string _fileXlsPath = string.Empty;
         private string _colNumberIndex = string.Empty;
@@ -33,9 +34,10 @@ namespace Dictcreator
         private int _startNumberIndex = 1;
         private int _endNumberIndex = 100;
         private string _pathToAudio = string.Empty;
+        private string _pathToPicture = string.Empty;
         private int _everyIterSave = 10;
         private int _sheetIndex = 1;
-
+        private bool _downloadPicture;
         public static AppSettings Instance
         {
             private set { }
@@ -226,6 +228,33 @@ namespace Dictcreator
         }
 
         public Dictionary<int, string> ColIndexCharMap { get => _colIndexCharMap; private set => _colIndexCharMap = value; }
+        public string PictureDirName { get => _pictureDirName; set => _pictureDirName = value; }
+        public string PathToPicture
+        {
+            get
+            {
+                if (FileXlsPath.Length > 0)
+                {
+                    var arr = FileXlsPath.Split('\\').ToList();
+                    arr.RemoveAt(arr.Count - 1);
+                    _pathToPicture = string.Join("\\", arr);
+                    _pathToPicture += "\\" + PictureDirName;
+
+                    try
+                    {
+                        Directory.CreateDirectory(_pathToPicture);
+                    }
+                    catch (UnauthorizedAccessException e)
+                    {
+                        MessageBox.Show("Внимание у приложения нет прав на создание раздела");
+                    }
+                }
+
+                return _pathToPicture;
+            }
+        }
+
+        public bool DownloadPicture { get => _downloadPicture; set => _downloadPicture = value; }
 
         #endregion
 
@@ -262,6 +291,8 @@ namespace Dictcreator
         YOUGLISH,
         REVERSO,
         WORD_HUNT,
-        MERRIAM_WEBSTER
+        MERRIAM_WEBSTER,
+        EMPTY,
+        PICTURE,
     }
 }

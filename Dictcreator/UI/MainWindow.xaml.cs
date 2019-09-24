@@ -166,5 +166,15 @@ namespace Dictcreator
                 }
             }   
         }
+
+        private void OnPictureCheckBoxChecked(object sender, RoutedEventArgs e)
+        {
+            AppSettings.Instance.DownloadPicture = true;
+        }
+
+        private void OnPictureCheckBoxUnchecked(object sender, RoutedEventArgs e)
+        {
+            AppSettings.Instance.DownloadPicture = false;
+        }
     }
 }

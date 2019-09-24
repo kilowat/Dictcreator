@@ -209,7 +209,6 @@
             Grid.Row="11"
             Typography.Capitals="AllSmallCaps"
             TextChanged="ColumnSettings_TextChanged" FontFamily="Arial"/>
-
         <TextBlock 
             Text="Колонка merriam-webster:" 
             Grid.Column="1" 
@@ -224,10 +223,23 @@
             Grid.Row="12"
             Typography.Capitals="AllSmallCaps"
             TextChanged="ColumnSettings_TextChanged" FontFamily="Arial"/>
+        
+        <TextBlock 
+            Text="Скачать картинку:" 
+            Grid.Column="1" 
+            Grid.Row="13" 
+            Margin="0,8,0,0" Grid.ColumnSpan="2"/>
+        <CheckBox 
+            x:Name="savePictureCheckBox"
+            Grid.Column="3"
+            Margin="0,10,166,6"   
+            Grid.Row="13"
+            Typography.Capitals="AllSmallCaps" Checked="OnPictureCheckBoxChecked" Unchecked="OnPictureCheckBoxUnchecked"
+           />
         <TextBlock 
              Text="Сохранять на каждом n шаге:" 
              Grid.Column="1" 
-             Grid.Row="13" 
+             Grid.Row="14" 
              Foreground="Red"
              Margin="0,8,0,0" Grid.ColumnSpan="2"/>
         <TextBox
@@ -236,11 +248,11 @@
             Grid.Column="3"
             Margin="0,10,166,6"
             TextAlignment="Center"   
-            Grid.Row="13" FontSize="16"/>
+            Grid.Row="14" FontSize="16"/>
         <TextBlock 
              Text="Порядковый номер листа:" 
              Grid.Column="1" 
-             Grid.Row="14" 
+             Grid.Row="15" 
              Foreground="Red"
              Margin="0,8,0,0" Grid.ColumnSpan="2"/>
         <TextBox
@@ -249,12 +261,12 @@
             Grid.Column="3"
             Margin="0,10,166,6"
             TextAlignment="Center"   
-            Grid.Row="14" FontSize="16"/>
+            Grid.Row="15" FontSize="16"/>
         
         <TextBlock 
              Text="Начать с номера строки:" 
              Grid.Column="1" 
-             Grid.Row="15" 
+             Grid.Row="16" 
              Foreground="Red"
              Margin="0,8,0,0" Grid.ColumnSpan="2"/>
         <TextBox
@@ -263,12 +275,12 @@
             Grid.Column="3"
             Margin="0,10,166,6"
             TextAlignment="Center"   
-            Grid.Row="15" FontSize="16"/>
+            Grid.Row="16" FontSize="16"/>
 
         <TextBlock 
              Text="Закончить номером:" 
              Grid.Column="1" 
-             Grid.Row="16" 
+             Grid.Row="17" 
              Foreground="Red"
              Margin="0,8,0,0" Grid.ColumnSpan="2"/>
         <TextBox
@@ -277,12 +289,12 @@
             Grid.Column="3"
             Margin="0,10,134,6"
             TextAlignment="Center"     
-            Grid.Row="16"/>
+            Grid.Row="17"/>
 
         <TextBlock 
              Text="Обрабатываемый индекс:" 
              Grid.Column="1" 
-             Grid.Row="17" 
+             Grid.Row="18" 
              Foreground="#FFD100FF"
              Margin="0,8,0,0" Grid.ColumnSpan="2"/>
         <TextBlock 
@@ -291,12 +303,12 @@
             Grid.Column="3"
             Margin="0,10,166,6"
             TextAlignment="Center"     
-            Grid.Row="17" Foreground="#FFE80000"/>
+            Grid.Row="18" Foreground="#FFE80000"/>
 
         <TextBlock 
              Text="Обрабатываемое слово:" 
              Grid.Column="1" 
-             Grid.Row="18" 
+             Grid.Row="19" 
              Foreground="#FFD100FF"
              Margin="0,8,0,0" Grid.ColumnSpan="2"/>
         <TextBlock 
@@ -305,12 +317,12 @@
             Grid.Column="3"
             Margin="0,10,10,6"
             TextAlignment="Center"     
-            Grid.Row="18" Foreground="#FFDA8408"/>
+            Grid.Row="19" Foreground="#FFDA8408"/>
 
         <ProgressBar
             x:Name="progress"
             Grid.Column="1" 
-            Grid.Row="19"
+            Grid.Row="20"
             Grid.ColumnSpan="3" Value="-3"/>
         <Button
             x:Name="startButton"

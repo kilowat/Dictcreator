@@ -43,6 +43,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -78,6 +79,7 @@
     <Compile Include="Core\Fetchers\LinkFetcherReverso.cs" />
     <Compile Include="Core\Fetchers\LinkFetcherWordHunt.cs" />
     <Compile Include="Core\Fetchers\LinkFetcherYouglish.cs" />
+    <Compile Include="Core\Fetchers\PictureFetcher.cs" />
     <Compile Include="Core\Fetchers\TranscriptionFetcherTopPhonetics.cs" />
     <Compile Include="Core\Fetchers\TranscriptionFetcherWordHunt.cs" />
     <Compile Include="Core\Parser.cs" />

@@ -22,6 +22,7 @@ namespace Dictcreator.Core.Fetchers
     public enum CellType
     {
         STRING,
-        LINK
+        LINK,
+        EMPTY
     }
 }

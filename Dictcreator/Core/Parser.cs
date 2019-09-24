@@ -42,9 +42,9 @@ namespace Dictcreator.Core
 
 
         private void InitParser()
-        {
+        {   
             _dataFetcher = new List<DataFetcher>();
-
+            
             _dataFetcher.Add(new TranscriptionFetcherWordHunt());
             _dataFetcher.Add(new TranslateFetcherReverso());
             _dataFetcher.Add(new ExamplesFetcherWoordHunt());
@@ -53,6 +53,7 @@ namespace Dictcreator.Core
             _dataFetcher.Add(new LinkFetcherReverso());
             _dataFetcher.Add(new LinkFetcherWordHunt());
             _dataFetcher.Add(new LinkFetcherYouglish());
+            _dataFetcher.Add(new PictureFetcher());  
         }
 
         public async Task<bool> RunAsync()
@@ -165,9 +166,11 @@ namespace Dictcreator.Core
 
                 foreach (DataFetcher fetcher in _dataFetcher)
                 {
-                    if (fetcher.ColIndex == -1) continue;
-
-                    if (i % AppSettings.Instance.EveryIterSave == 1) _xlWorkbook.Save();
+                    if (fetcher.CellExlType != CellType.EMPTY)
+                    {
+                        if (fetcher.ColIndex == -1) continue;
+                        if (i % AppSettings.Instance.EveryIterSave == 1) _xlWorkbook.Save();
+                    }
 
                     string result = fetcher.GetResult(currentWord);
 
