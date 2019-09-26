@@ -25,6 +25,8 @@ namespace Dictcreator.Core.Fetchers
 
         private async Task<string> GetResultAsync(string word)
         {
+            word = word.Replace(" ", "-").ToLower();
+
             string result = "";
 
             WebRequest request = WebRequest.Create(new Uri(_urlPath + word + ".mp3"));
