@@ -41,8 +41,8 @@ namespace Dictcreator.Core.Fetchers
             using (var ms = new MemoryStream(img))
             {
                 var original = Image.FromStream(ms);
-                var newHeight = 200;
-                var newWidth = ScaleWidth(original.Height, 200, original.Width);
+                var newHeight = AppSettings.Instance.PicSize;
+                var newWidth = ScaleWidth(original.Height, AppSettings.Instance.PicSize, original.Width);
 
                 using (var newPic = new Bitmap(newWidth, newHeight))
                 using (var gr = Graphics.FromImage(newPic))

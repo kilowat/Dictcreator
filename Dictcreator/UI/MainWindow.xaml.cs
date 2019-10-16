@@ -96,6 +96,7 @@ namespace Dictcreator
             AppSettings.Instance.SheetIndex = Int32.Parse(SheetNumber.Text);
             AppSettings.Instance.StartNumberIndex = Int32.Parse(startNumberIndex.Text);
             AppSettings.Instance.EndNumberIndex = Int32.Parse(endNumberIndex.Text);
+            AppSettings.Instance.PicSize = Int32.Parse(picSize.Text);
         }
 
         private void OnProcessCanceledHandler()

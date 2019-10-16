@@ -237,6 +237,15 @@
             Typography.Capitals="AllSmallCaps" Checked="OnPictureCheckBoxChecked" Unchecked="OnPictureCheckBoxUnchecked"
            />
         <TextBlock 
+            Grid.Column="3"
+            Grid.Row="13"
+            Text="Размер в px:" Margin="46,8,89,6"/>
+        <TextBox
+            x:Name="picSize"
+            Grid.Column="3"
+            Grid.Row="13"
+            Text="400" Margin="142,8,58,6"/>
+        <TextBlock 
              Text="Сохранять на каждом n шаге:" 
              Grid.Column="1" 
              Grid.Row="14" 

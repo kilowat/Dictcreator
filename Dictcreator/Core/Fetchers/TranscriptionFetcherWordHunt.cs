@@ -27,6 +27,8 @@ namespace Dictcreator.Core.Fetchers
 
         private async Task<string> GetResultAsync(string word)
         {
+            word = word.ToLower();
+
             string result = "";
             var htmlDoc = new HtmlDocument();
 
@@ -41,6 +43,7 @@ namespace Dictcreator.Core.Fetchers
                 if (transcription != null && transcription.OuterHtml != null)
                 {
                     result = transcription.OuterHtml;
+                    result = result.Replace("|", "");
                 }
 
             }

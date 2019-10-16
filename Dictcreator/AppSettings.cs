@@ -38,6 +38,7 @@ namespace Dictcreator
         private int _everyIterSave = 10;
         private int _sheetIndex = 1;
         private bool _downloadPicture;
+        private int _picSize = 400;
         public static AppSettings Instance
         {
             private set { }
@@ -255,6 +256,7 @@ namespace Dictcreator
         }
 
         public bool DownloadPicture { get => _downloadPicture; set => _downloadPicture = value; }
+        public int PicSize { get => _picSize; set => _picSize = value; }
 
         #endregion
 
