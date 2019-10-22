@@ -24,7 +24,7 @@ namespace Dictcreator.Core.Fetchers
         {
             var result = GetResultAsync(word);
             var wordResult = result.Result;
-           
+
             if (wordResult == String.Empty) // Попробуем поискать слово на другом сайте
             {
                 var resultForvo = GetWordOnForvoAsync(word);
@@ -72,7 +72,7 @@ namespace Dictcreator.Core.Fetchers
         }
 
         private async Task<string> GetFilePathOnForvoAsync(string word)
-        {
+        { 
             string result = "";
             var htmlDoc = new HtmlDocument();
 
@@ -93,6 +93,7 @@ namespace Dictcreator.Core.Fetchers
                 {
                     var span = source[0];
                     var text = span.InnerText.Replace(" pronunciation", "");
+                    text = span.InnerText.Replace(" ", "-");
                     if (text == word)
                     {
                         var onclickTxt = span.Attributes["onclick"].Value;
