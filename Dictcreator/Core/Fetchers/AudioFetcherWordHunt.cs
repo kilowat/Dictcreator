@@ -94,6 +94,7 @@ namespace Dictcreator.Core.Fetchers
                     var span = source[0];
                     var text = span.InnerText.Replace(" pronunciation", "");
                     text = span.InnerText.Replace(" ", "-");
+                    text = text.Replace("-pronunciation", "");
                     if (text == word)
                     {
                         var onclickTxt = span.Attributes["onclick"].Value;
