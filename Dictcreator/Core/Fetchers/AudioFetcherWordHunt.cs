@@ -22,13 +22,13 @@ namespace Dictcreator.Core.Fetchers
 
         public override string GetResult(string word)
         {
-            var resultForvo = GetWordOnForvoAsync(word);
-            var wordResult = resultForvo.Result;
+            var result = GetResultAsync(word);
+            var wordResult = result.Result;
            
             if (wordResult == String.Empty) // Попробуем поискать слово на другом сайте
             {
-                var result = GetResultAsync(word);
-                wordResult = result.Result;
+                var resultForvo = GetWordOnForvoAsync(word);
+                 wordResult = resultForvo.Result;
             }
 
             if (wordResult == String.Empty) // Попробуем поискать слово на другом сайте
