@@ -44,6 +44,7 @@ namespace Dictcreator.Core.Fetchers
                 {
                     result = transcription.OuterHtml;
                     result = result.Replace("|", "");
+                    result = "[" + result + "]";
                 }
 
             }
