@@ -27,17 +27,17 @@ namespace Dictcreator.Core.Fetchers
         {
             var result = GetResultAsync(word);
             var wordResult = result.Result;
-
+            
             if (wordResult == String.Empty) // Попробуем поискать слово на другом сайте
             {
                 wordResult = _forvoFetcher.GetResult(word);
-            }
- 
+            }       
+            /*
             if (wordResult == String.Empty) // Попробуем поискать слово на другом сайте
             {
                 wordResult = _turenFetcher.GetResult(word);
             }
-
+            */
             return wordResult;
         }
 

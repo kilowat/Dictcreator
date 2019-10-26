@@ -76,7 +76,7 @@ namespace Dictcreator.Core.Fetchers
 
                 if (source == null) //try all accent
                 {
-                    url = "https://forvo.com/search/" + word;
+                    url = "https://forvo.com/search/" + word + "/en_uk/";
                     response = await client.GetStringAsync(url);
                     htmlDoc.LoadHtml(response);
                     source = htmlDoc.DocumentNode.SelectNodes(xPathQuery);
