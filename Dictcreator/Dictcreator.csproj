@@ -71,6 +71,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AppSettings.cs" />
+    <Compile Include="Core\Fetchers\AudioFetcherForvo.cs" />
+    <Compile Include="Core\Fetchers\AudioFetcherTuren.cs" />
     <Compile Include="Core\Fetchers\AudioFetcherWordHunt.cs" />
     <Compile Include="Core\Fetchers\DataFetcher.cs" />
     <Compile Include="Core\Fetchers\ExamplesFetcherReverso.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Core\Fetchers\PictureFetcher.cs" />
     <Compile Include="Core\Fetchers\TranscriptionFetcherTopPhonetics.cs" />
     <Compile Include="Core\Fetchers\TranscriptionFetcherWordHunt.cs" />
+    <Compile Include="Core\Fetchers\TranslateFetcherWordHunt.cs" />
     <Compile Include="Core\Parser.cs" />
     <Compile Include="Core\Fetchers\TranslateFetcherReverso.cs" />
     <Compile Include="UI\MainWindow.xaml.cs">

@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace Dictcreator.Core.Fetchers
 {
-    class TranscriptionFetcherWordHunt : DataFetcher
+    public class TranslateFetcherWordHunt :DataFetcher
     {
         private string _siteUrl = "https://wooordhunt.ru/word/";
-        private string _xPathQuery = "//div[@id='wd_title']//span[@class='transcription']//text()";
+        private string _xPathQuery = "//span[@class='t_inline_en']//text()";
 
         public override string ServiceName => "WordHunt";
 
         public override CellType CellExlType => CellType.STRING;
 
-        protected override ColumnName ColName => ColumnName.TRANSCRIPTION;
+        protected override ColumnName ColName => ColumnName.TRANSLATE;
 
         public override string GetResult(string word)
         {
@@ -43,7 +43,6 @@ namespace Dictcreator.Core.Fetchers
                 if (transcription != null && transcription.OuterHtml != null)
                 {
                     result = transcription.OuterHtml;
-                    result = result.Replace("|", "");
                     result = result.Trim();
                 }
 
