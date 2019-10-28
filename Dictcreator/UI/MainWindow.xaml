@@ -166,10 +166,33 @@
             TextChanged="ColumnSettings_TextChanged" FontFamily="Arial"/>
 
         <TextBlock 
+            Text="Tureng:" 
+            Grid.Column="3" 
+            Grid.Row="7" 
+            Margin="79,39,104,20" Grid.RowSpan="2"/>
+        <CheckBox
+            x:Name="audioTurengCheckbox"
+            Grid.Column="3" 
+            Grid.Row="8" 
+            Margin="138,6,71,17" RenderTransformOrigin="5.733,0.167" IsChecked="True" Checked="OnAudioTurengChecked" Unchecked="OnAudioTurengUnchecked"/>
+
+        <TextBlock 
+            Text="Forvo:" 
+            Grid.Column="3" 
+            Grid.Row="8" 
+            Margin="79,19,104,0"/>
+        <CheckBox
+            x:Name="audioForvoCheckbox"
+            Grid.Column="3" 
+            Grid.Row="8" 
+            Margin="138,23,71,0"  RenderTransformOrigin="5.733,0.167" IsChecked="True" Unchecked="OnAudioForvoUnchecked" Checked="OnAudioForvoChecked"/>
+
+        <TextBlock 
             Text="Колонка youglish:" 
             Grid.Column="1" 
             Grid.Row="9" 
             Margin="0,8,0,0" Grid.ColumnSpan="2"/>
+
         <TextBox
             x:Name="colYouglish"
             Text="G" 
@@ -179,7 +202,6 @@
             Grid.Row="9"
             Typography.Capitals="AllSmallCaps"
             TextChanged="ColumnSettings_TextChanged" FontFamily="Arial"/>
-
         <TextBlock 
             Text="Колонка context.reverso:" 
             Grid.Column="1" 
@@ -223,7 +245,7 @@
             Grid.Row="12"
             Typography.Capitals="AllSmallCaps"
             TextChanged="ColumnSettings_TextChanged" FontFamily="Arial"/>
-        
+
         <TextBlock 
             Text="Скачать картинку:" 
             Grid.Column="1" 
@@ -271,7 +293,7 @@
             Margin="0,10,166,6"
             TextAlignment="Center"   
             Grid.Row="15" FontSize="16"/>
-        
+
         <TextBlock 
              Text="Начать с номера строки:" 
              Grid.Column="1" 

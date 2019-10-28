@@ -177,5 +177,25 @@ namespace Dictcreator
         {
             AppSettings.Instance.DownloadPicture = false;
         }
+
+        private void OnAudioTurengChecked(object sender, RoutedEventArgs e)
+        {
+            AppSettings.Instance.DownloadAudioTureng = true;
+        }
+
+        private void OnAudioTurengUnchecked(object sender, RoutedEventArgs e)
+        {
+            AppSettings.Instance.DownloadAudioTureng = false;
+        }
+
+        private void OnAudioForvoChecked(object sender, RoutedEventArgs e)
+        {
+            AppSettings.Instance.DownloadAudioForvo = true;
+        }
+
+        private void OnAudioForvoUnchecked(object sender, RoutedEventArgs e)
+        {
+            AppSettings.Instance.DownloadAudioForvo = false;
+        }
     }
 }

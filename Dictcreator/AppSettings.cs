@@ -37,6 +37,8 @@ namespace Dictcreator
         private string _pathToPicture = string.Empty;
         private int _everyIterSave = 10;
         private int _sheetIndex = 1;
+        private bool _downloadAudioTureng = true;
+        private bool _downloadAudioForvo = true;
         private bool _downloadPicture;
         private int _picSize = 400;
         public static AppSettings Instance
@@ -257,6 +259,8 @@ namespace Dictcreator
 
         public bool DownloadPicture { get => _downloadPicture; set => _downloadPicture = value; }
         public int PicSize { get => _picSize; set => _picSize = value; }
+        public bool DownloadAudioTureng { get => _downloadAudioTureng; set => _downloadAudioTureng = value; }
+        public bool DownloadAudioForvo { get => _downloadAudioForvo; set => _downloadAudioForvo = value; }
 
         #endregion
 
