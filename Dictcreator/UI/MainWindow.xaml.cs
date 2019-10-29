@@ -77,6 +77,24 @@ namespace Dictcreator
             _parser.OnProcessIndexStep += OnProcessIndexStepHandler;
             _parser.OnProcessWordStep += OnProcessWordStepHandler;
             _parser.OnProcessCanceled += OnProcessCanceledHandler;
+            _parser.OnProcessAudioDownload += OnProcessAudioDownloadHandler;
+            _parser.OnProcesAudioDownloadOk += OnProccessAudioDownloadOk;
+        }
+
+        private void OnProccessAudioDownloadOk()
+        {    
+            this.Dispatcher.Invoke(() => {
+                var count = Int32.Parse(downloadAudioCounterTextBlock.Text);
+                count++;
+                downloadAudioCounterTextBlock.Text = count.ToString();
+            });
+        }
+
+        private void OnProcessAudioDownloadHandler(string service)
+        {
+            this.Dispatcher.Invoke(() => {
+                processDownloadAudioStatusTextBlock.Text = service;
+            });
         }
 
         private void InitSettings()
@@ -112,6 +130,7 @@ namespace Dictcreator
         private void OnProcessWordStepHandler(string word)
         {
             this.Dispatcher.Invoke(() => {
+                processDownloadAudioStatusTextBlock.Text = "";
                 processStatusTextBlock.Text = word;
             });
         }
@@ -196,6 +215,26 @@ namespace Dictcreator
         private void OnAudioForvoUnchecked(object sender, RoutedEventArgs e)
         {
             AppSettings.Instance.DownloadAudioForvo = false;
+        }
+
+        private void onAudioVocalularyChecked(object sender, RoutedEventArgs e)
+        {
+            AppSettings.Instance.DownloadAudioVocabulary = true;
+        }
+
+        private void OnAudioVocabularyUnchecked(object sender, RoutedEventArgs e)
+        {
+            AppSettings.Instance.DownloadAudioVocabulary = false;
+        }
+
+        private void OnAudioDictionaryChecked(object sender, RoutedEventArgs e)
+        {
+            AppSettings.Instance.DownloadAudioDictionary = true;
+        }
+
+        private void OnAudioDictionaryUnchecked(object sender, RoutedEventArgs e)
+        {
+            AppSettings.Instance.DownloadAudioDictionary = false;
         }
     }
 }

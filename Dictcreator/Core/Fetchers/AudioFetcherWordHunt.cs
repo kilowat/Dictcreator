@@ -16,26 +16,13 @@ namespace Dictcreator.Core.Fetchers
 
         public override CellType CellExlType => CellType.LINK;
 
-        public override string ServiceName => "Audio";
+        public override string ServiceName => "wooordhunt.ru";
 
         protected override ColumnName ColName => ColumnName.AUDIO;
-
-        private AudioFetcherForvo _forvoFetcher = new AudioFetcherForvo();
-        private AudioFetcherTuren _turenFetcher = new AudioFetcherTuren();
-
         public override string GetResult(string word)
         {
             var result = GetResultAsync(word);
-            var wordResult = result.Result;
-
-            if (wordResult == String.Empty && AppSettings.Instance.DownloadAudioTureng) // Попробуем поискать слово на другом сайте
-            {
-                wordResult = _turenFetcher.GetResult(word);
-            }
-            if (wordResult == String.Empty && AppSettings.Instance.DownloadAudioForvo) // Попробуем поискать слово на другом сайте
-            {
-                wordResult = _forvoFetcher.GetResult(word);
-            }                
+            var wordResult = result.Result;          
             
             return wordResult;
         }

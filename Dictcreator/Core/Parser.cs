@@ -30,17 +30,24 @@ namespace Dictcreator.Core
         public event ProcessIndexStep OnProcessIndexStep;
         public event ProcessWordStep OnProcessWordStep;
         public event ProcessCanceled OnProcessCanceled;
+        public event ProccessAudioDownload OnProcessAudioDownload;
+        public event ProccessAudioDownloadOk OnProcesAudioDownloadOk;
 
         public CancellationToken CancelToken { get => _cancelToken; private set => _cancelToken = value; }
         public CancellationTokenSource TokenSource { get => _tokenSource; private set => _tokenSource = value; }
         public bool IsWorked { get => _isWorked; private set => _isWorked = value; }
 
+        private AudioFetcherForvo _forvoFetcher = new AudioFetcherForvo();
+        private AudioFetcherTuren _turenFetcher = new AudioFetcherTuren();
+        private AudioFethcerVocabulary _vocabularyFetcher = new AudioFethcerVocabulary();
+        private AudioFetcherDictionary _dictonaryFetcher = new AudioFetcherDictionary();
+
+        private List<DataFetcher> _audioFetchers;
+
         public Parser()
         {
             InitParser();
         }
-
-
         private void InitParser()
         {   
             _dataFetcher = new List<DataFetcher>();
@@ -53,7 +60,21 @@ namespace Dictcreator.Core
             _dataFetcher.Add(new LinkFetcherReverso());
             _dataFetcher.Add(new LinkFetcherWordHunt());
             _dataFetcher.Add(new LinkFetcherYouglish());
-            _dataFetcher.Add(new PictureFetcher());  
+            _dataFetcher.Add(new PictureFetcher());
+
+            _audioFetchers = new List<DataFetcher>();
+
+            if (AppSettings.Instance.DownloadAudioVocabulary)
+                _audioFetchers.Add(new AudioFethcerVocabulary());
+
+            if (AppSettings.Instance.DownloadAudioDictionary)
+                _audioFetchers.Add(new AudioFetcherDictionary());
+
+            if (AppSettings.Instance.DownloadAudioTureng)
+                _audioFetchers.Add(new AudioFetcherTuren());
+
+            if (AppSettings.Instance.DownloadAudioForvo)
+                _audioFetchers.Add(new AudioFetcherForvo());
         }
 
         public async Task<bool> RunAsync()
@@ -121,10 +142,7 @@ namespace Dictcreator.Core
 
         private void ReadWriteFile()
         {
-            if (OnProcessStared != null)
-            {
-                OnProcessStared();
-            }
+            OnProcessStared?.Invoke();
 
             CancelToken.ThrowIfCancellationRequested();
 
@@ -146,14 +164,8 @@ namespace Dictcreator.Core
 
                 var currentWord = curCell.Value2;
 
-                if (OnProcessIndexStep != null)
-                {
-                    OnProcessIndexStep(i);
-                }
-                if (OnProcessWordStep != null)
-                {
-                    OnProcessWordStep(currentWord);
-                }
+                OnProcessIndexStep?.Invoke(i);
+                OnProcessWordStep?.Invoke(currentWord);
 
                 //Thread.Sleep(1000);
 
@@ -166,13 +178,36 @@ namespace Dictcreator.Core
 
                 foreach (DataFetcher fetcher in _dataFetcher)
                 {
+                    string result = "";
+                    result = fetcher.GetResult(currentWord);
+
+                    if (fetcher.ColIndex == AppSettings.Instance.ColumnNameIndexMap[ColumnName.AUDIO])
+                    {
+                        OnProcessAudioDownload?.Invoke(fetcher.ServiceName);
+
+                        foreach (var audioFetcher in _audioFetchers)
+                        {
+                            if (result == String.Empty)
+                            {
+                                OnProcessAudioDownload?.Invoke(audioFetcher.ServiceName);
+                                result = audioFetcher.GetResult(currentWord);
+                            }
+                        }
+                        if (result == String.Empty)
+                        {
+                            OnProcessAudioDownload?.Invoke("НЕ НАШЛИ!");
+                        }
+                        else
+                        {
+                            OnProcesAudioDownloadOk?.Invoke();
+                        }
+                    }
+
                     if (fetcher.CellExlType != CellType.EMPTY)
                     {
                         if (fetcher.ColIndex == -1) continue;
                         if (i % AppSettings.Instance.EveryIterSave == 1) _xlWorkbook.Save();
                     }
-
-                    string result = fetcher.GetResult(currentWord);
 
                     if (fetcher.CellExlType == CellType.STRING)
                     {
@@ -182,7 +217,6 @@ namespace Dictcreator.Core
                     {
                         var fCell = (Excel.Range)_xlWorksheet.get_Range(AppSettings.Instance.ColIndexCharMap[fetcher.ColIndex] + i);
                        _xlWorksheet.Hyperlinks.Add(fCell, result, Type.Missing, fetcher.ServiceName+"/" + currentWord, fetcher.ServiceName+"/" + currentWord);
-
                     }
                 }
             }
@@ -231,4 +265,6 @@ namespace Dictcreator.Core
     public delegate void ProcessCompleted();
     public delegate void ProcessIndexStep(int index);
     public delegate void ProcessWordStep(string word);
+    public delegate void ProccessAudioDownload(string service);
+    public delegate void ProccessAudioDownloadOk();
 }

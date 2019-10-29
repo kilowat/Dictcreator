@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Dictcreator.Core.Fetchers
 {
-    public class AudioFetcherForvo : DataFetcher
+    public class AudioFethcerVocabulary : DataFetcher
     {
         public override CellType CellExlType => CellType.LINK;
 
-        public override string ServiceName => "forvo.com";
+        public override string ServiceName => "vocabulary.com";
 
         protected override ColumnName ColName => ColumnName.AUDIO;
 
@@ -24,7 +24,6 @@ namespace Dictcreator.Core.Fetchers
 
             return wordResult;
         }
-
         private async Task<string> GetWordAsync(string word)
         {
             word = word.Replace(" ", "-").ToLower();
@@ -34,20 +33,18 @@ namespace Dictcreator.Core.Fetchers
             WebClient webClient = new WebClient();
             var filePathResult = GetFilePathAsync(word);
 
-            string filePath = filePathResult.Result;
-
-            if (filePath != String.Empty)
+            string fileId = filePathResult.Result;
+            string filePath = "https://audio.vocab.com/1.0/us/"+ fileId +".mp3";
+            if (fileId != String.Empty)
             {
-                var fileUrl = "https://forvo.com/player-mp3Handler.php?path=" + filePath;
-
-                WebRequest request = WebRequest.Create(new Uri(fileUrl));
+                WebRequest request = WebRequest.Create(new Uri(filePath));
                 request.Method = "HEAD";
 
                 using (WebResponse response = await request.GetResponseAsync())
                 {
                     if (response.ContentLength > 0)
                     {
-                        webClient.DownloadFile(fileUrl, AppSettings.Instance.PathToAudio + "\\" + word + ".mp3");
+                        webClient.DownloadFile(filePath, AppSettings.Instance.PathToAudio + "\\" + word + ".mp3");
                         result = AppSettings.Instance.AudioDirName + "\\" + word + ".mp3";
                     }
                 }
@@ -65,37 +62,20 @@ namespace Dictcreator.Core.Fetchers
 
             int count = 1;
 
-            var url = "https://forvo.com/search/" + word + "/en_usa/";
-            var xPathQuery = "//li[@class='list-words']//ul//li//span";
+            var url = "https://www.vocabulary.com/dictionary/";
+            var xPathQuery = "//a[@class='audio']";
 
             try
             {
-                var response = await client.GetStringAsync(url);
+                var response = await client.GetStringAsync(url + word);
                 htmlDoc.LoadHtml(response);
-                var source = htmlDoc.DocumentNode.SelectNodes(xPathQuery);
+                var source = htmlDoc.DocumentNode.SelectSingleNode(xPathQuery);
 
-                if (source == null) //try all accent
+                if (source != null && source.OuterHtml != null)
                 {
-                    url = "https://forvo.com/search/" + word + "/en_uk/";
-                    response = await client.GetStringAsync(url);
-                    htmlDoc.LoadHtml(response);
-                    source = htmlDoc.DocumentNode.SelectNodes(xPathQuery);
+                    result = source.Attributes["data-audio"].Value;
                 }
 
-                if (source != null)
-                {
-                    var span = source[0];
-                    var text = span.InnerText.Replace(" pronunciation", "");
-                    text = span.InnerText.Replace(" ", "-");
-                    text = text.Replace("-pronunciation", "");
-                    text = text.ToLower();
-                    if (text == word)
-                    {
-                        var onclickTxt = span.Attributes["onclick"].Value;
-                        var tmpsplit = onclickTxt.Split('\'');
-                        result = tmpsplit[1];
-                    }
-                }
             }
             catch (HttpRequestException e)
             {

@@ -13,7 +13,7 @@ namespace Dictcreator.Core.Fetchers
     {
         public override CellType CellExlType => CellType.LINK;
 
-        public override string ServiceName => "Audio";
+        public override string ServiceName => "tureng.com";
 
         protected override ColumnName ColName => ColumnName.AUDIO;
 
@@ -56,7 +56,6 @@ namespace Dictcreator.Core.Fetchers
 
             return result;
         }
-
         private async Task<string> GetFilePathAsync(string word)
         {
             string result = "";

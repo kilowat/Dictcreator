@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Dictcreator"
         mc:Ignorable="d"
         Title="Dictcreator"
-        Height="880" 
-        Width="520"
+        Height="920" 
+        Width="580"
         ResizeMode="NoResize"
         FontSize="16">
     <Grid>
@@ -24,6 +24,7 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="40" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
@@ -63,7 +64,7 @@
             x:Name="colNumberIndex"   
             Text="A"  
             Grid.Column="3"
-            Margin="0,10,166,6"
+            Margin="0,10,196,6"
             TextAlignment="Center"     
             Grid.Row="3" 
             FontSize="16"
@@ -79,7 +80,7 @@
             Text="B"
             x:Name="colEnWord"
             Grid.Column="3"
-            Margin="0,10,166,6"
+            Margin="0,10,196,6"
             TextAlignment="Center"     
             Grid.Row="4"
             Typography.Capitals="AllSmallCaps"
@@ -102,7 +103,7 @@
             x:Name="colTranscript"
             Text="C"
             Grid.Column="3"
-            Margin="0,10,166,6"
+            Margin="0,10,196,6"
             TextAlignment="Center"     
             Grid.Row="5"
             Typography.Capitals="AllSmallCaps"
@@ -117,7 +118,7 @@
             Text="D" 
             x:Name="colTranslation"
             Grid.Column="3"
-            Margin="0,10,166,6"
+            Margin="0,10,196,6"
             TextAlignment="Center"     
             Grid.Row="6"
             Typography.Capitals="AllSmallCaps"
@@ -132,7 +133,7 @@
             x:Name="colExamples"
             Text="E" 
             Grid.Column="3"
-            Margin="0,10,166,6"
+            Margin="0,10,196,6"
             TextAlignment="Center"     
             Grid.Row="7"
             Typography.Capitals="AllSmallCaps"
@@ -154,38 +155,54 @@
             Text="Колонка аудио:" 
             Grid.Column="1" 
             Grid.Row="8" 
-            Margin="0,8,0,0" Grid.ColumnSpan="2"/>
+            Margin="0,8,0,0"/>
         <TextBox
             x:Name="colAudio"
             Text="F" 
             Grid.Column="3"
-            Margin="0,10,166,6"
+            Margin="0,10,196,6"
             TextAlignment="Center"     
             Grid.Row="8"
             Typography.Capitals="AllSmallCaps"
             TextChanged="ColumnSettings_TextChanged" FontFamily="Arial"/>
 
+        <TextBlock
+            Text="Vocab:"
+            Grid.Column="3" 
+            Grid.Row="8" Margin="85,1,125,18"/>
+        <CheckBox
+            x:Name="audioVocabularyCheckbox"
+            Grid.Column="3" 
+            Grid.Row="8" Margin="133,6,107,17" IsChecked="True" Checked="onAudioVocalularyChecked" Unchecked="OnAudioVocabularyUnchecked"/>
+        <TextBlock
+            Text="Dict:"
+            Grid.Column="3" 
+            Grid.Row="8" Margin="85,19,125,0"/>
+        <CheckBox
+            x:Name="audioDictionaryCheckbox"
+            Grid.Column="3" 
+            Grid.Row="8" Margin="133,23,107,0" IsChecked="True" Checked="OnAudioDictionaryChecked" Unchecked="OnAudioDictionaryUnchecked"/>
         <TextBlock 
             Text="Tureng:" 
             Grid.Column="3" 
-            Grid.Row="7" 
-            Margin="79,39,104,20" Grid.RowSpan="2"/>
+            Grid.Row="8" 
+            Margin="178,0,20,19"/>
         <CheckBox
             x:Name="audioTurengCheckbox"
             Grid.Column="3" 
             Grid.Row="8" 
-            Margin="138,6,71,17" RenderTransformOrigin="5.733,0.167" IsChecked="True" Checked="OnAudioTurengChecked" Unchecked="OnAudioTurengUnchecked"/>
+            Margin="235,4,6,0" RenderTransformOrigin="5.733,0.167" IsChecked="True" Checked="OnAudioTurengChecked" Unchecked="OnAudioTurengUnchecked" Height="17" VerticalAlignment="Top"/>
 
         <TextBlock 
             Text="Forvo:" 
             Grid.Column="3" 
             Grid.Row="8" 
-            Margin="79,19,104,0"/>
+            Margin="178,19,25,0"/>
         <CheckBox
             x:Name="audioForvoCheckbox"
             Grid.Column="3" 
             Grid.Row="8" 
-            Margin="138,23,71,0"  RenderTransformOrigin="5.733,0.167" IsChecked="True" Unchecked="OnAudioForvoUnchecked" Checked="OnAudioForvoChecked"/>
+            Margin="235,23,6,0"  RenderTransformOrigin="5.733,0.167" IsChecked="True" Unchecked="OnAudioForvoUnchecked" Checked="OnAudioForvoChecked"/>
 
         <TextBlock 
             Text="Колонка youglish:" 
@@ -197,7 +214,7 @@
             x:Name="colYouglish"
             Text="G" 
             Grid.Column="3"
-            Margin="0,10,166,6"
+            Margin="0,10,196,6"
             TextAlignment="Center"     
             Grid.Row="9"
             Typography.Capitals="AllSmallCaps"
@@ -211,7 +228,7 @@
             x:Name="colContextReverso"
             Text="H" 
             Grid.Column="3"
-            Margin="0,10,166,6"
+            Margin="0,10,196,6"
             TextAlignment="Center"     
             Grid.Row="10"
             Typography.Capitals="AllSmallCaps"
@@ -226,7 +243,7 @@
             x:Name="colWoordHunt"
             Text="I" 
             Grid.Column="3"
-            Margin="0,10,166,6"
+            Margin="0,10,196,6"
             TextAlignment="Center"     
             Grid.Row="11"
             Typography.Capitals="AllSmallCaps"
@@ -240,7 +257,7 @@
             x:Name="colMerWebster"
             Text="J" 
             Grid.Column="3"
-            Margin="0,10,166,6"
+            Margin="0,10,196,6"
             TextAlignment="Center"     
             Grid.Row="12"
             Typography.Capitals="AllSmallCaps"
@@ -277,7 +294,7 @@
             x:Name="StepSave"
             Text="10" 
             Grid.Column="3"
-            Margin="0,10,166,6"
+            Margin="0,10,196,6"
             TextAlignment="Center"   
             Grid.Row="14" FontSize="16"/>
         <TextBlock 
@@ -290,7 +307,7 @@
             x:Name="SheetNumber"
             Text="1" 
             Grid.Column="3"
-            Margin="0,10,166,6"
+            Margin="0,10,196,6"
             TextAlignment="Center"   
             Grid.Row="15" FontSize="16"/>
 
@@ -304,7 +321,7 @@
             x:Name="startNumberIndex"
             Text="1" 
             Grid.Column="3"
-            Margin="0,10,166,6"
+            Margin="0,10,196,6"
             TextAlignment="Center"   
             Grid.Row="16" FontSize="16"/>
 
@@ -318,7 +335,7 @@
             x:Name="endNumberIndex"
             Text="100" 
             Grid.Column="3"
-            Margin="0,10,134,6"
+            Margin="0,10,196,6"
             TextAlignment="Center"     
             Grid.Row="17"/>
 
@@ -349,16 +366,37 @@
             Margin="0,10,10,6"
             TextAlignment="Center"     
             Grid.Row="19" Foreground="#FFDA8408"/>
+        <TextBlock 
+             Text="Скачено аудио:" 
+             Grid.Column="1" 
+             Grid.Row="20" 
+             Foreground="#FFD100FF"
+             Margin="0,8,10,5"/>
+        <TextBlock 
+            x:Name="downloadAudioCounterTextBlock"
+             Text="0" 
+             TextAlignment="Center"
+             Grid.Column="2" 
+             Grid.Row="20" 
+             Foreground="#FFD100FF"
+             Margin="0,8,10,5"/>
+        <TextBlock 
+            x:Name="processDownloadAudioStatusTextBlock"
+            Text="" 
+            Grid.Column="3"
+            Margin="0,10,10,6"
+            TextAlignment="Center"     
+            Grid.Row="20"/>
 
         <ProgressBar
             x:Name="progress"
             Grid.Column="1" 
-            Grid.Row="20"
+            Grid.Row="21"
             Grid.ColumnSpan="3" Value="-3"/>
         <Button
             x:Name="startButton"
             Grid.Column="1" 
-            Grid.Row="21"
+            Grid.Row="22"
             Margin="5"
             Background="Green"
             Foreground="#FFFF6C6C"
@@ -366,7 +404,7 @@
         <Button
             x:Name="cancelButton"
             Grid.Column="3" 
-            Grid.Row="21"
+            Grid.Row="22"
             Margin="5"
             Background="Cornsilk"
             Content="Отменить"        

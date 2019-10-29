@@ -71,9 +71,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AppSettings.cs" />
+    <Compile Include="Core\Fetchers\AudioFetcherDictionary.cs" />
     <Compile Include="Core\Fetchers\AudioFetcherForvo.cs" />
     <Compile Include="Core\Fetchers\AudioFetcherTuren.cs" />
     <Compile Include="Core\Fetchers\AudioFetcherWordHunt.cs" />
+    <Compile Include="Core\Fetchers\AudioFethcerVocabulary.cs" />
     <Compile Include="Core\Fetchers\DataFetcher.cs" />
     <Compile Include="Core\Fetchers\ExamplesFetcherReverso.cs" />
     <Compile Include="Core\Fetchers\ExamplesFetcherWoordHunt.cs" />
