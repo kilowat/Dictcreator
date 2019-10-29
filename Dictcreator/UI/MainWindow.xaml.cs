@@ -44,9 +44,9 @@ namespace Dictcreator
 
         private void ClickStartButton(object sender, RoutedEventArgs e)
         {
-           InitSettings();
-
-           var result = _parser.RunAsync();
+            InitSettings();
+            _parser.InitParser();
+            var result = _parser.RunAsync();
         }
 
         private void ClickCancelButton(object sender, RoutedEventArgs e)

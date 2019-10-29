@@ -22,6 +22,7 @@ namespace Dictcreator.Core.Fetchers
         public override string GetResult(string word)
         {
             var result = GetResultAsync(word);
+            return "";
             return result.Result;
         }
 

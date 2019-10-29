@@ -46,9 +46,9 @@ namespace Dictcreator.Core
 
         public Parser()
         {
-            InitParser();
+            
         }
-        private void InitParser()
+        public void InitParser()
         {   
             _dataFetcher = new List<DataFetcher>();
             
@@ -178,6 +178,12 @@ namespace Dictcreator.Core
 
                 foreach (DataFetcher fetcher in _dataFetcher)
                 {
+                    if (fetcher.CellExlType != CellType.EMPTY)
+                    {
+                        if (fetcher.ColIndex == -1) continue;
+                        if (i % AppSettings.Instance.EveryIterSave == 1) _xlWorkbook.Save();
+                    }
+
                     string result = "";
                     result = fetcher.GetResult(currentWord);
 
@@ -201,12 +207,6 @@ namespace Dictcreator.Core
                         {
                             OnProcesAudioDownloadOk?.Invoke();
                         }
-                    }
-
-                    if (fetcher.CellExlType != CellType.EMPTY)
-                    {
-                        if (fetcher.ColIndex == -1) continue;
-                        if (i % AppSettings.Instance.EveryIterSave == 1) _xlWorkbook.Save();
                     }
 
                     if (fetcher.CellExlType == CellType.STRING)

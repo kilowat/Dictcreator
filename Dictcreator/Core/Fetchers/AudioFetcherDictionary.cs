@@ -26,8 +26,6 @@ namespace Dictcreator.Core.Fetchers
         }
         private async Task<string> GetWordAsync(string word)
         {
-            word = word.Replace(" ", "-").ToLower();
-
             string result = "";
 
             WebClient webClient = new WebClient();
@@ -44,6 +42,7 @@ namespace Dictcreator.Core.Fetchers
                 {
                     if (response.ContentLength > 0)
                     {
+                        word = word.Replace(" ", "-").ToLower();
                         webClient.DownloadFile(fileUrl, AppSettings.Instance.PathToAudio + "\\" + word + ".mp3");
                         result = AppSettings.Instance.AudioDirName + "\\" + word + ".mp3";
                     }
@@ -64,6 +63,7 @@ namespace Dictcreator.Core.Fetchers
 
             var url = "https://www.dictionary.com/browse/";
             var xPathQuery = "//audio//source[2]";
+            var xPathQueryCheck = "//h1";
 
             try
             {
@@ -71,7 +71,10 @@ namespace Dictcreator.Core.Fetchers
                 htmlDoc.LoadHtml(response);
                 var source = htmlDoc.DocumentNode.SelectSingleNode(xPathQuery);
 
-                if (source != null && source.OuterHtml != null)
+                var checkWord = htmlDoc.DocumentNode.SelectSingleNode(xPathQueryCheck).InnerText;
+                var checkWordWithDash = checkWord.Replace(" ", "-");
+
+                if ((checkWord == word || checkWordWithDash == word) && source != null && source.OuterHtml != null)
                 {
                     result = source.Attributes["src"].Value;
                 }

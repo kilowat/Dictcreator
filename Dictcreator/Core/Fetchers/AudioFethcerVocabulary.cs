@@ -26,8 +26,6 @@ namespace Dictcreator.Core.Fetchers
         }
         private async Task<string> GetWordAsync(string word)
         {
-            word = word.Replace(" ", "-").ToLower();
-
             string result = "";
 
             WebClient webClient = new WebClient();
@@ -44,6 +42,7 @@ namespace Dictcreator.Core.Fetchers
                 {
                     if (response.ContentLength > 0)
                     {
+                        word = word.Replace(" ", "-").ToLower();
                         webClient.DownloadFile(filePath, AppSettings.Instance.PathToAudio + "\\" + word + ".mp3");
                         result = AppSettings.Instance.AudioDirName + "\\" + word + ".mp3";
                     }
