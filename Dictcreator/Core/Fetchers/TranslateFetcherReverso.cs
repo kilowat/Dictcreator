@@ -22,17 +22,10 @@ namespace Dictcreator.Core.Fetchers
 
         protected override ColumnName ColName => ColumnName.TRANSLATE;
 
-        private TranslateFetcherWordHunt _wordHuntTranslateFeter = new TranslateFetcherWordHunt();
-
         public override string GetResult(string word)
         {
             var result = GetResultAsync(word);
             string resultString = result.Result;
-           
-            if (resultString == String.Empty) //
-            {
-                 resultString = _wordHuntTranslateFeter.GetResult(word);  
-            }
 
             return resultString;
         }

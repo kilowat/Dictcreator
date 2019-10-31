@@ -12,6 +12,7 @@ namespace Dictcreator.Core.Fetchers
     {
         private string _siteUrl = "https://wooordhunt.ru/word/";
         private string _xPathQuery = "//span[@class='t_inline_en']//text()";
+        private TranslateFetcherReverso _reversoFetcher = new TranslateFetcherReverso();
 
         public override string ServiceName => "WordHunt";
 
@@ -22,8 +23,15 @@ namespace Dictcreator.Core.Fetchers
         public override string GetResult(string word)
         {
             var result = GetResultAsync(word);
-            return "";
-            return result.Result;
+
+            string resultString = result.Result;
+
+            if (resultString == String.Empty) //
+            {
+                resultString = _reversoFetcher.GetResult(word);
+            }
+
+            return resultString;
         }
 
         private async Task<string> GetResultAsync(string word)

@@ -53,7 +53,7 @@ namespace Dictcreator.Core
             _dataFetcher = new List<DataFetcher>();
             
             _dataFetcher.Add(new TranscriptionFetcherWordHunt());
-            _dataFetcher.Add(new TranslateFetcherReverso());
+            _dataFetcher.Add(new TranslateFetcherWordHunt());
             _dataFetcher.Add(new ExamplesFetcherWoordHunt());
             _dataFetcher.Add(new AudioFetcherWordHunt());
             _dataFetcher.Add(new LinkFetcherMerriemWebster());
@@ -171,7 +171,7 @@ namespace Dictcreator.Core
 
                 if (CancelToken.IsCancellationRequested)
                 {
-                    CancelToken.ThrowIfCancellationRequested();
+                    //CancelToken.ThrowIfCancellationRequested();
                 }
 
                 WriteIndex(i);
@@ -187,7 +187,7 @@ namespace Dictcreator.Core
                     string result = "";
                     result = fetcher.GetResult(currentWord);
 
-                    if (fetcher.ColIndex == AppSettings.Instance.ColumnNameIndexMap[ColumnName.AUDIO])
+                    if (fetcher.ColIndex == AppSettings.Instance.ColumnNameIndexMap[ColumnName.AUDIO] && fetcher.ColIndex != -1)
                     {
                         OnProcessAudioDownload?.Invoke(fetcher.ServiceName);
 
