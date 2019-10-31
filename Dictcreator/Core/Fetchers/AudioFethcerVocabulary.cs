@@ -63,14 +63,19 @@ namespace Dictcreator.Core.Fetchers
 
             var url = "https://www.vocabulary.com/dictionary/";
             var xPathQuery = "//a[@class='audio']";
+            var xPathQueryCheck = "//h1";
 
             try
             {
                 var response = await client.GetStringAsync(url + word);
                 htmlDoc.LoadHtml(response);
+
+                var checkWord = htmlDoc.DocumentNode.SelectSingleNode(xPathQueryCheck).InnerText;
+                var checkWordWithDash = checkWord.Replace(" ", "-");
+
                 var source = htmlDoc.DocumentNode.SelectSingleNode(xPathQuery);
 
-                if (source != null && source.OuterHtml != null)
+                if ((checkWord == word || checkWordWithDash == word) && source != null && source.OuterHtml != null)
                 {
                     result = source.Attributes["data-audio"].Value;
                 }
