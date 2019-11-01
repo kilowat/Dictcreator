@@ -33,6 +33,7 @@ namespace Dictcreator.Core.Fetchers
 
             string fileId = filePathResult.Result;
             string filePath = "https://audio.vocab.com/1.0/us/"+ fileId +".mp3";
+
             if (fileId != String.Empty)
             {
                 WebRequest request = WebRequest.Create(new Uri(filePath));
@@ -70,7 +71,10 @@ namespace Dictcreator.Core.Fetchers
                 var response = await client.GetStringAsync(url + word);
                 htmlDoc.LoadHtml(response);
 
-                var checkWord = htmlDoc.DocumentNode.SelectSingleNode(xPathQueryCheck).InnerText;
+                var checkWord = htmlDoc.DocumentNode.SelectSingleNode(xPathQueryCheck)?.InnerText;
+
+                if (checkWord == null) return result;
+
                 var checkWordWithDash = checkWord.Replace(" ", "-");
 
                 var source = htmlDoc.DocumentNode.SelectSingleNode(xPathQuery);
@@ -79,11 +83,15 @@ namespace Dictcreator.Core.Fetchers
                 {
                     result = source.Attributes["data-audio"].Value;
                 }
+                else
+                {
+                    return result;
+                }
 
             }
             catch (HttpRequestException e)
             {
-                //404 nothing do
+                return result;
             }
 
             return result;

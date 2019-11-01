@@ -71,7 +71,10 @@ namespace Dictcreator.Core.Fetchers
                 htmlDoc.LoadHtml(response);
                 var source = htmlDoc.DocumentNode.SelectSingleNode(xPathQuery);
 
-                var checkWord = htmlDoc.DocumentNode.SelectSingleNode(xPathQueryCheck).InnerText;
+                var checkWord = htmlDoc.DocumentNode.SelectSingleNode(xPathQueryCheck)?.InnerText;
+
+                if (checkWord == null) return result;
+
                 var checkWordWithDash = checkWord.Replace(" ", "-");
 
                 if ((checkWord == word || checkWordWithDash == word) && source != null && source.OuterHtml != null)
