@@ -75,7 +75,7 @@
     <Compile Include="Core\Fetchers\AudioFetcherForvo.cs" />
     <Compile Include="Core\Fetchers\AudioFetcherTuren.cs" />
     <Compile Include="Core\Fetchers\AudioFetcherWordHunt.cs" />
-    <Compile Include="Core\Fetchers\AudioFethcerVocabulary.cs" />
+    <Compile Include="Core\Fetchers\AudioFethcerYahoo.cs" />
     <Compile Include="Core\Fetchers\DataFetcher.cs" />
     <Compile Include="Core\Fetchers\ExamplesFetcherReverso.cs" />
     <Compile Include="Core\Fetchers\ExamplesFetcherWoordHunt.cs" />

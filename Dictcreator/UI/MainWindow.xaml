@@ -167,13 +167,13 @@
             TextChanged="ColumnSettings_TextChanged" FontFamily="Arial"/>
 
         <TextBlock
-            Text="Vocab:"
+            Text="Yahoo:"
             Grid.Column="3" 
             Grid.Row="8" Margin="85,1,125,18"/>
         <CheckBox
-            x:Name="audioVocabularyCheckbox"
+            x:Name="audioYahooCheckbox"
             Grid.Column="3" 
-            Grid.Row="8" Margin="133,6,107,17" IsChecked="True" Checked="onAudioVocalularyChecked" Unchecked="OnAudioVocabularyUnchecked"/>
+            Grid.Row="8" Margin="133,6,107,17" IsChecked="True" Checked="OnAudioYahooChecked" Unchecked="OnAudioYahooUnchecked"/>
         <TextBlock
             Text="Dict:"
             Grid.Column="3" 

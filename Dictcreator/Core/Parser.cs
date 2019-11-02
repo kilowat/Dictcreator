@@ -39,7 +39,7 @@ namespace Dictcreator.Core
 
         private AudioFetcherForvo _forvoFetcher = new AudioFetcherForvo();
         private AudioFetcherTuren _turenFetcher = new AudioFetcherTuren();
-        private AudioFethcerVocabulary _vocabularyFetcher = new AudioFethcerVocabulary();
+        private AudioFethcerYahoo _vocabularyFetcher = new AudioFethcerYahoo();
         private AudioFetcherDictionary _dictonaryFetcher = new AudioFetcherDictionary();
 
         private List<DataFetcher> _audioFetchers;
@@ -64,8 +64,8 @@ namespace Dictcreator.Core
 
             _audioFetchers = new List<DataFetcher>();
 
-            if (AppSettings.Instance.DownloadAudioVocabulary)
-                _audioFetchers.Add(new AudioFethcerVocabulary());
+            if (AppSettings.Instance.DownloadAudioYahoo)
+                _audioFetchers.Add(new AudioFethcerYahoo());
 
             if (AppSettings.Instance.DownloadAudioDictionary)
                 _audioFetchers.Add(new AudioFetcherDictionary());
@@ -171,7 +171,7 @@ namespace Dictcreator.Core
 
                 if (CancelToken.IsCancellationRequested)
                 {
-                    //CancelToken.ThrowIfCancellationRequested();
+                    CancelToken.ThrowIfCancellationRequested();
                 }
 
                 WriteIndex(i);

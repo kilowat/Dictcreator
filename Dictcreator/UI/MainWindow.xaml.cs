@@ -217,14 +217,14 @@ namespace Dictcreator
             AppSettings.Instance.DownloadAudioForvo = false;
         }
 
-        private void onAudioVocalularyChecked(object sender, RoutedEventArgs e)
+        private void OnAudioYahooChecked(object sender, RoutedEventArgs e)
         {
-            AppSettings.Instance.DownloadAudioVocabulary = true;
+            AppSettings.Instance.DownloadAudioYahoo = true;
         }
 
-        private void OnAudioVocabularyUnchecked(object sender, RoutedEventArgs e)
+        private void OnAudioYahooUnchecked(object sender, RoutedEventArgs e)
         {
-            AppSettings.Instance.DownloadAudioVocabulary = false;
+            AppSettings.Instance.DownloadAudioYahoo = false;
         }
 
         private void OnAudioDictionaryChecked(object sender, RoutedEventArgs e)

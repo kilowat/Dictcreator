@@ -39,7 +39,7 @@ namespace Dictcreator
         private int _sheetIndex = 1;
         private bool _downloadAudioTureng = true;
         private bool _downloadAudioForvo = true;
-        private bool _downloadAudioVocabulary = true;
+        private bool _downloadAudioYahoo = true;
         private bool _downloadAudioDictionary = true;
         private bool _downloadPicture;
         private int _picSize = 400;
@@ -263,7 +263,7 @@ namespace Dictcreator
         public int PicSize { get => _picSize; set => _picSize = value; }
         public bool DownloadAudioTureng { get => _downloadAudioTureng; set => _downloadAudioTureng = value; }
         public bool DownloadAudioForvo { get => _downloadAudioForvo; set => _downloadAudioForvo = value; }
-        public bool DownloadAudioVocabulary { get => _downloadAudioVocabulary; set => _downloadAudioVocabulary = value; }
+        public bool DownloadAudioYahoo { get => _downloadAudioYahoo; set => _downloadAudioYahoo = value; }
         public bool DownloadAudioDictionary { get => _downloadAudioDictionary; set => _downloadAudioDictionary = value; }
 
         #endregion
