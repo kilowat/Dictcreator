@@ -56,6 +56,9 @@ namespace Dictcreator.Core.Fetchers
                     }
 
                     result = string.Join(", ", translateWordList);
+
+                    if (result.Length > 0 && result[0] == ',')
+                        result = result.Remove(0, 1);
                 }
             }
             catch (HttpRequestException e)
