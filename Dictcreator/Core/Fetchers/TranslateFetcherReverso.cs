@@ -14,7 +14,7 @@ namespace Dictcreator.Core.Fetchers
     public class TranslateFetcherReverso : DataFetcher
     {
         private string _siteUrl = "https://context.reverso.net/translation/english-russian/";
-        private string _xPathQuery = "//div[@id='translations-content']//a";
+        private string _xPathQuery = "//div[@id='translations-content']//*[contains(@class, 'translation')]";
 
         public override CellType CellExlType => CellType.STRING;
 
@@ -49,7 +49,10 @@ namespace Dictcreator.Core.Fetchers
 
                     foreach (var item in translateList)
                     {
-                        translateWordList.Add(Regex.Replace(item.InnerText, "\n", "").Trim());
+                        var wordStr = Regex.Replace(item.InnerText, "\n", "").Trim();
+
+                        if (wordStr != String.Empty)
+                            translateWordList.Add(wordStr);
                     }
 
                     result = string.Join(", ", translateWordList);
