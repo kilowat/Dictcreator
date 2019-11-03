@@ -162,7 +162,9 @@ namespace Dictcreator.Core
 
                 if (curCell.Value2 == null) continue;
 
-                var currentWord = curCell.Value2;
+                string currentWord = curCell.Value2;
+
+                var findWord = currentWord.ToLower();
 
                 OnProcessIndexStep?.Invoke(i);
                 OnProcessWordStep?.Invoke(currentWord);
@@ -185,7 +187,7 @@ namespace Dictcreator.Core
                     }
 
                     string result = "";
-                    result = fetcher.GetResult(currentWord);
+                    result = fetcher.GetResult(findWord);
 
                     if (fetcher.ColIndex == AppSettings.Instance.ColumnNameIndexMap[ColumnName.AUDIO] && fetcher.ColIndex != -1)
                     {
@@ -196,7 +198,7 @@ namespace Dictcreator.Core
                             if (result == String.Empty)
                             {
                                 OnProcessAudioDownload?.Invoke(audioFetcher.ServiceName);
-                                result = audioFetcher.GetResult(currentWord);
+                                result = audioFetcher.GetResult(findWord);
                             }
                         }
                         if (result == String.Empty)
